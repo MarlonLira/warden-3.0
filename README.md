@@ -5,7 +5,7 @@
 **Empresa:** ##\
 **Nome do app:** Warden\
 **Site:** ##\
-**Tecnologias de desenvolvimento:** [Flutter](https://flutter.dev/docs) | [React Js](https://pt-br.reactjs.org/) | [Node js](https://nodejs.org/en/docs/) | (Input - [Typescript](https://www.typescriptlang.org/docs/home.html)) -> (Output -- [Javascript](https://developer.mozilla.org/pt-BR/docs/Aprender/JavaScript))
+**Tecnologias de desenvolvimento:** [Flutter](https://flutter.dev/docs) | [Angular](https://angular.io/) | [Node js](https://nodejs.org/en/docs/) | (Input - [Typescript](https://www.typescriptlang.org/docs/home.html)) -> (Output -- [Javascript](https://developer.mozilla.org/pt-BR/docs/Aprender/JavaScript))
 
 ### Requisitos
 - [VS Code](https://code.visualstudio.com/ "Visual Studio Code").
