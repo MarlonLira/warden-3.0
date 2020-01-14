@@ -10,10 +10,10 @@ import Row from '../common/layout/row';
 
 class Dashboard extends Component {
   componentWillMount(){
-    this.props.getSummary();
+    console.log(this.props.getSummary());
   }
   render() {
-    const{credit, debt} = this.props.summary;
+    const{credit, debit} = this.props.summary;
     return (
       <div>
         <ContentHeader title='Dashboard' small='Versão 1.0' />
@@ -30,7 +30,7 @@ class Dashboard extends Component {
               cols='12 4'
               color='red'
               icon='credit-card'
-              value={`R$ ${debt}`}
+              value={`R$ ${debit}`}
               text='Total de Débitos'
             />
             <ValueBox
