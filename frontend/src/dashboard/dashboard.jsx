@@ -7,13 +7,15 @@ import ContentHeader from '../common/template/contentHeader';
 import Content from '../common/template/content';
 import ValueBox from '../common/widget/valueBox';
 import Row from '../common/layout/row';
+import {ReturnIfValid} from '../common/functions/properties';
 
 class Dashboard extends Component {
   componentWillMount(){
-    console.log(this.props.getSummary());
+    this.props.getSummary();
   }
   render() {
     const{credit, debit} = this.props.summary;
+    const consolidated = (ReturnIfValid(credit, 0) - ReturnIfValid(debit, 0));
     return (
       <div>
         <ContentHeader title='Dashboard' small='Versão 1.0' />
@@ -37,7 +39,7 @@ class Dashboard extends Component {
               cols='12 4'
               color='blue'
               icon='money'
-              value='R$ 30'
+              value= {`R$ ${consolidated}`}
               text='Valor Consolidado'
             />
           </Row>

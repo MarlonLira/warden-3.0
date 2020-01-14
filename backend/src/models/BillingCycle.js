@@ -10,6 +10,8 @@ class BillingCycle extends sequelize_1.Model {
             this.id = json.id;
             this.credit = json.credit;
             this.debit = json.debit;
+            this.date = json.date;
+            this.month = this.date.getMonth() + 1;
         }
     }
 }
@@ -25,13 +27,21 @@ BillingCycle.init({
     },
     debit: {
         type: new sequelize_1.DataTypes.FLOAT
+    },
+    date: {
+        type: new sequelize_1.DataTypes.DATE,
+        allowNull: false
+    },
+    month: {
+        type: new sequelize_1.DataTypes.INTEGER,
+        allowNull: false
     }
 }, {
     sequelize: _instance,
     tableName: 'billingCycle',
     scopes: {
         public: {
-            attributes: ['credit', 'debit']
+            attributes: ['credit', 'debit', 'date']
         }
     }
 });

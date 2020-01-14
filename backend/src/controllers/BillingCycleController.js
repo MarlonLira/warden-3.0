@@ -9,7 +9,9 @@ class BillingCycleController extends BillingCycle_1.BillingCycle {
         return new Promise((resolve, reject) => {
             BillingCycle_1.BillingCycle.create({
                 credit: Helpers_1.Attributes.ReturnIfValid(this.credit),
-                debit: Helpers_1.Attributes.ReturnIfValid(this.debit)
+                debit: Helpers_1.Attributes.ReturnIfValid(this.debit),
+                date: Helpers_1.Attributes.ReturnIfValid(this.date),
+                month: this.month
             }).then(result => {
                 response.status(Http_1.HttpCode.Ok).send(Http_2.GetHttpMessage(Http_1.HttpCode.Ok, null, result));
                 resolve(result);
@@ -20,8 +22,14 @@ class BillingCycleController extends BillingCycle_1.BillingCycle {
         });
     }
     Search(response, isAll) {
+        let currentDate = new Date();
+        console.log(currentDate.getDate().toString());
         return new Promise((resolve, reject) => {
-            BillingCycle_1.BillingCycle.scope('public').findAll()
+            BillingCycle_1.BillingCycle.scope('public').findAll({
+                where: {
+                    month: currentDate.getMonth()
+                }
+            })
                 .then(result => {
                 if (result != null && result != undefined) {
                     response.status(Http_1.HttpCode.Ok).send(result);

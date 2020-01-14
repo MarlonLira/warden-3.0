@@ -9,7 +9,9 @@ export default class BillingCycleController extends BillingCycle implements IEnt
     return new Promise((resolve, reject) => {
       BillingCycle.create({
         credit: Attributes.ReturnIfValid(this.credit),
-        debit: Attributes.ReturnIfValid(this.debit)
+        debit: Attributes.ReturnIfValid(this.debit),
+        date: Attributes.ReturnIfValid(this.date),
+        month: this.month
       }).then(result => {
         response.status(HttpCode.Ok).send(GetHttpMessage(HttpCode.Ok, null, result));
         resolve(result);
@@ -20,8 +22,15 @@ export default class BillingCycleController extends BillingCycle implements IEnt
     })
   }
   Search(response?: any, isAll?: boolean) {
+    let currentDate = new Date();
+    console.log(currentDate.getDate().toString());
+
     return new Promise((resolve, reject) => {
-    BillingCycle.scope('public').findAll()
+    BillingCycle.scope('public').findAll({
+      where:{
+        month: currentDate.getMonth()
+      }
+    })
       .then(result => {
         if (result != null && result != undefined){
           response.status(HttpCode.Ok).send(result);
