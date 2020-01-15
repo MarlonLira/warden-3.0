@@ -1,10 +1,14 @@
 import axios from 'axios';
-const BASE_URL = 'http://localhost:3003/api';
+const BASE_URL = 'http://localhost:4001';
 
-export function getSummary(){
-  const request = axios.get(`${BASE_URL}/billingCycles/summary`);
-  return {
-    type: 'BILLING_SUMMARY_FETCHED',
-    payload: request
-  }
+export function getSummary() {
+  return new Promise((resolve, reject) => {
+    axios.get(`${BASE_URL}/billingCycles`)
+      .then(request => {
+        resolve({
+          type: 'BILLING_SUMMARY_FETCHED',
+          payload: request
+        });
+      });
+  });
 }

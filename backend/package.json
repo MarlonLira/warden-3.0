@@ -2,13 +2,13 @@
   "name": "warden-backend",
   "version": "0.0.1",
   "description": "",
-  "main": "dist/src/app.js",
+  "main": "src/app.js",
   "scripts": {
     "build-ts": "tsc",
     "postinstall": "npm run build-ts",
     "start": "npm run app",
-    "app": "node dist/src/app.js",
-    "watch-node": "nodemon dist/src/app.js",
+    "app": "node src/app.js",
+    "watch-node": "nodemon src/app.js",
     "watch-ts": "tsc -w"
   },
   "repository": {
