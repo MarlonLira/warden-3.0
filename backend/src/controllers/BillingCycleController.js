@@ -26,7 +26,6 @@ class BillingCycleController extends BillingCycle_1.BillingCycle {
     }
     Search(response, isAll) {
         let date = new InnerDate_1.InnerDate().Now();
-        console.log(date);
         let query = {};
         if (!isAll) {
             query.attributes = [

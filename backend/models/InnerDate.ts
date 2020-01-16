@@ -28,8 +28,6 @@ class InnerDate {
     this.Year = _date.getFullYear();
     this.Month = _date.getMonth() + 1;
     this.Day = _date.getDay();
-    //return `${this.Year}-${this.Month}-${this.Day}`;
-    console.log(this);
     return this;
   }
 }

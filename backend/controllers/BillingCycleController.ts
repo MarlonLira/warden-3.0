@@ -27,7 +27,6 @@ export default class BillingCycleController extends BillingCycle implements IEnt
   }
   Search(response?: any, isAll?: boolean) {
     let date = new InnerDate().Now();
-    console.log(date);
     let query: any = {};
 
     if(!isAll){

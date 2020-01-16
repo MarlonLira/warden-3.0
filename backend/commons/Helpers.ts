@@ -5,19 +5,11 @@ class Helpers{
 class Attributes {
 
   static IsValid(value : any){
-    let result = false;
-    if (value != undefined && value != '' && value != null) {
-      result = true;
-    }
-    return result;
+    return (value != undefined && value != '' && value != null) ? true : false;
   }
 
   static ReturnIfValid(value : any){
-    let result = undefined;
-    if (value != undefined && value != '' && value != null) {
-      result = value;
-    }
-    return result;
+    return (value != undefined && value != '' && value != null) ? value : undefined;
   }
   
 }
