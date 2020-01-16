@@ -48,20 +48,13 @@
 ### Estrutura dos arquivos do FrontEnd da Aplicação -> Web
 **assets/** - Arquivos estáticos: fontes, imagens, etc.\
 **src/** - Arquivos de códigos da aplicação.\
+**src/NomeView/** - Arquivos referentes a view, ex: NomeView.jsx, NomeViewActions.js, NomeViewReducer.js/ 
 **src/common/** - Arquivos comuns da aplicação. Inclui componentes e utilitários.\
 **src/common/styles/** - Arquivos de estilo da aplicação.\
-**src/views/** - Telas.\
-**src/views/exemploDeView/** - Arquivos de uma tela.\
-**src/views/exemploDeView/components/** - Componentes utilizados na tela.\
-**src/views/exemploDeView/components/ExemploX.jsx** - Componente de apresentação utilizado na tela.\
-**src/views/exemploDeView/index.js** - Exporta o tela como default.\
-**src/views/exemploDeView/types.js** - Contém constantes para serem utilizadas nos types das actions creators e reducers.\
-**src/Navigation.jsx** - Configura a navegação de todas as telas.\
 **.gitignore** - Configura arquivos a serem ignorados pelo git.\
 **App.js** - Arquivo inicial. Arquivo chamado pelo Expo.\
 **package.json** - Arquivo de dependências e detalhes do projeto.\
 **README.md** - Leia-me com instruções.\
-**yarn.lock** - Mapa de dependencias gerenciado pelo yarn| Caso algúem use o Yarn.
 **package-lock** - Mapa de dependencias gerenciado pelo NPM| Caso algúem use o NPM.
 
 ### Estrutura dos arquivos do FrontEnd da Aplicação -> Mobile
