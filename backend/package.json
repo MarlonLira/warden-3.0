@@ -8,7 +8,7 @@
     "postinstall": "npm run build-ts",
     "start": "npm run app",
     "app": "node src/app.js",
-    "watch-node": "nodemon src/app.js",
+    "dev": "nodemon src/app.js",
     "watch-ts": "tsc -w"
   },
   "repository": {

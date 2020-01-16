@@ -12,7 +12,7 @@ class Attributes {
         return result;
     }
     static ReturnIfValid(value) {
-        let result = null;
+        let result = undefined;
         if (value != undefined && value != '' && value != null) {
             result = value;
         }

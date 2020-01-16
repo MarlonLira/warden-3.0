@@ -1,6 +1,7 @@
 import { Model, DataTypes } from 'sequelize';
 import { DbInstance } from '../context/DbContext';
-import { InnerJson} from '../commons/Helpers';
+import { Attributes } from '../commons/Helpers';
+import { InnerDate }from '../models/InnerDate';
 
 var _instance = new DbInstance().getInstance();
 
@@ -8,17 +9,15 @@ class BillingCycle extends Model {
   id!: number;
   credit!: number;
   debit!: number;
-  date!: Date;
+  date!: InnerDate;
   month!: number;
   constructor(json?: any) {
     super();
-    if (InnerJson.IsValid(json, ["date", "id"])) {
-      this.id = json.id;
-      this.credit = json.credit;
-      this.debit = json.debit;
-      this.date = json.date;
-      this.month = this.date.getMonth() + 1
-    }
+    this.id = Attributes.IsValid(json.id) ? json.id : undefined;
+    this.credit = Attributes.IsValid(json.credit) ? json.credit : 0;
+    this.debit = Attributes.IsValid(json.debit) ? json.debit : 0;
+    this.date = Attributes.IsValid(json.date) ?  new InnerDate(json.date) : undefined;
+    this.month = Attributes.IsValid(json.date) ? this.date.Month : undefined;
   }
 }
 
@@ -35,7 +34,7 @@ BillingCycle.init({
     type: new DataTypes.FLOAT
   },
   date: {
-    type: new DataTypes.DATE,
+    type: new DataTypes.STRING(10),
     allowNull: false
   },
   month: {
@@ -48,6 +47,9 @@ BillingCycle.init({
   scopes: {
     public: {
       attributes: ['credit', 'debit', 'date']
+    },
+    consolidated: {
+      attributes: ['credit', 'debit']
     }
   }
 });
