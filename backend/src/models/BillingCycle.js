@@ -12,7 +12,7 @@ class BillingCycle extends sequelize_1.Model {
         this.credit = Helpers_1.Attributes.IsValid(json.credit) ? json.credit : 0;
         this.debit = Helpers_1.Attributes.IsValid(json.debit) ? json.debit : 0;
         this.date = Helpers_1.Attributes.IsValid(json.date) ? new InnerDate_1.InnerDate(json.date) : undefined;
-        this.month = Helpers_1.Attributes.IsValid(json.date) ? this.date.Month : undefined;
+        this.test = new InnerDate_1.InnerDate(json.date).FullDate;
     }
 }
 exports.BillingCycle = BillingCycle;
@@ -30,10 +30,10 @@ BillingCycle.init({
     },
     date: {
         type: new sequelize_1.DataTypes.STRING(10),
-        allowNull: false
+        allowNull: true
     },
-    month: {
-        type: new sequelize_1.DataTypes.INTEGER,
+    test: {
+        type: new sequelize_1.DataTypes.STRING,
         allowNull: false
     }
 }, {
@@ -41,12 +41,12 @@ BillingCycle.init({
     tableName: 'billingCycle',
     scopes: {
         public: {
-            attributes: ['credit', 'debit', 'date']
+            attributes: ['credit', 'debit', 'test']
         },
         consolidated: {
             attributes: ['credit', 'debit']
         }
     }
 });
-BillingCycle.sync({ force: false });
+BillingCycle.sync({ force: true });
 //# sourceMappingURL=BillingCycle.js.map

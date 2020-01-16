@@ -1,7 +1,7 @@
 import { Model, DataTypes } from 'sequelize';
 import { DbInstance } from '../context/DbContext';
 import { Attributes } from '../commons/Helpers';
-import { InnerDate }from '../models/InnerDate';
+import { InnerDate } from '../models/InnerDate';
 
 var _instance = new DbInstance().getInstance();
 
@@ -10,14 +10,15 @@ class BillingCycle extends Model {
   credit!: number;
   debit!: number;
   date!: InnerDate;
-  month!: number;
+  //test: string;
+
   constructor(json?: any) {
     super();
     this.id = Attributes.IsValid(json.id) ? json.id : undefined;
     this.credit = Attributes.IsValid(json.credit) ? json.credit : 0;
     this.debit = Attributes.IsValid(json.debit) ? json.debit : 0;
-    this.date = Attributes.IsValid(json.date) ?  new InnerDate(json.date) : undefined;
-    this.month = Attributes.IsValid(json.date) ? this.date.Month : undefined;
+    this.date = Attributes.IsValid(json.date) ? new InnerDate(json.date) : undefined;
+    //this.test = new InnerDate(json.date).FullDate;
   }
 }
 
@@ -35,12 +36,13 @@ BillingCycle.init({
   },
   date: {
     type: new DataTypes.STRING(10),
-    allowNull: false
-  },
-  month: {
-    type: new DataTypes.INTEGER,
-    allowNull: false
+    allowNull: true
   }
+  // ,
+  // test: {
+  //   type: new DataTypes.STRING,
+  //   allowNull: false
+  // }
 }, {
   sequelize: _instance,
   tableName: 'billingCycle',
@@ -54,6 +56,6 @@ BillingCycle.init({
   }
 });
 
-BillingCycle.sync({ force: false });
+BillingCycle.sync({ force: true });
 
 export { BillingCycle }

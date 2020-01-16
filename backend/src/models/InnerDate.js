@@ -9,6 +9,7 @@ class InnerDate {
             this.Year = datePart[0];
             this.Month = datePart[1];
             this.Day = datePart[2];
+            this.FullDate = fullDate;
         }
         else {
             this._isValidDate = false;
@@ -22,6 +23,7 @@ class InnerDate {
         this.Year = _date.getFullYear();
         this.Month = _date.getMonth() + 1;
         this.Day = _date.getDay();
+        this.FullDate = `${this.Year}-${this.Month}-${this.Day}`;
         return this;
     }
 }

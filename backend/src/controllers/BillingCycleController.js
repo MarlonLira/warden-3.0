@@ -9,17 +9,21 @@ const Helpers_1 = require("../commons/Helpers");
 const InnerDate_1 = require("../models/InnerDate");
 class BillingCycleController extends BillingCycle_1.BillingCycle {
     Save(response) {
+        var _date = this.date.FullDate;
+        console.log(typeof (this.test));
+        console.log(this.test);
         return new Promise((resolve, reject) => {
+            console.log(this.test);
             BillingCycle_1.BillingCycle.create({
+                teste: Helpers_1.Attributes.ReturnIfValid(this.test),
                 credit: Helpers_1.Attributes.ReturnIfValid(this.credit),
                 debit: Helpers_1.Attributes.ReturnIfValid(this.debit),
-                date: Helpers_1.Attributes.ReturnIfValid(this.date.getFullDate()),
-                month: this.month
+                date: this.test
             }).then(result => {
                 response.status(Http_1.HttpCode.Ok).send(Http_2.GetHttpMessage(Http_1.HttpCode.Ok, null, result));
                 resolve(result);
             }).catch(error => {
-                console.error(error);
+                console.error(error.message);
                 resolve(response.status(Http_1.HttpCode.Internal_Server_Error).send(Http_2.GetHttpMessage(Http_1.HttpCode.Internal_Server_Error)));
             });
         });
@@ -27,15 +31,15 @@ class BillingCycleController extends BillingCycle_1.BillingCycle {
     Search(response, isAll) {
         let date = new InnerDate_1.InnerDate().Now();
         let query = {};
+        console.log(date);
         if (!isAll) {
             query.attributes = [
                 [sequelize_1.Sequelize.fn('SUM', sequelize_1.Sequelize.col('credit')), 'credit'],
                 [sequelize_1.Sequelize.fn('SUM', sequelize_1.Sequelize.col('debit')), 'debit']
             ];
             query.where = {
-                month: date.Month,
                 date: {
-                    [sequelize_2.Op.like]: `${date.Year}%`
+                    [sequelize_2.Op.like]: `${date.Year}-${date.Month}%`
                 }
             };
         }
