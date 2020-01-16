@@ -22,13 +22,11 @@ export default class BillingCycleController extends BillingCycle implements IEnt
     })
   }
   Search(response?: any, isAll?: boolean) {
-    let currentDate = new Date();
-    console.log(currentDate.getDate().toString());
-
+    let currentMonth = new Date().getMonth() + 1;
     return new Promise((resolve, reject) => {
     BillingCycle.scope('public').findAll({
       where:{
-        month: currentDate.getMonth()
+        month: currentMonth
       }
     })
       .then(result => {

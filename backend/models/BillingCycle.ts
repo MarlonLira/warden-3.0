@@ -1,6 +1,6 @@
 import { Model, DataTypes } from 'sequelize';
 import { DbInstance } from '../context/DbContext';
-import { Attributes } from '../commons/Helpers';
+import { InnerJson} from '../commons/Helpers';
 
 var _instance = new DbInstance().getInstance();
 
@@ -11,8 +11,8 @@ class BillingCycle extends Model {
   date!: Date;
   month!: number;
   constructor(json?: any) {
-    super()
-    if (json != undefined) {
+    super();
+    if (InnerJson.IsValid(json, ["date", "id"])) {
       this.id = json.id;
       this.credit = json.credit;
       this.debit = json.debit;

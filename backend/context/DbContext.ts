@@ -1,8 +1,7 @@
 import { Sequelize } from 'sequelize';
 import * as dbConfig from '../commons/configs/DbConfig.json';
 
-var _instance = null;
-var _dbConfig = dbConfig.MySql;
+var _dbConfig = dbConfig.MSSQL;
 
 class DbContext {
 
@@ -25,7 +24,7 @@ class DbContext {
       {
         port: this.port,
         host: this.host,
-        dialect: 'mysql',
+        dialect: 'mssql',
         ssl: true
       }
     );
@@ -35,7 +34,7 @@ class DbContext {
 
 class DbInstance {
   getInstance() {
-    return _instance ?? new DbContext().getNewInstance();
+    return new DbContext().getNewInstance();
   }
 }
 
