@@ -2,11 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 const DbContext_1 = require("../context/DbContext");
+const Helpers_1 = require("../commons/Helpers");
 var _instance = new DbContext_1.DbInstance().getInstance();
 class BillingCycle extends sequelize_1.Model {
     constructor(json) {
         super();
-        if (json != undefined) {
+        if (Helpers_1.InnerJson.IsValid(json, ["date", "id"])) {
             this.id = json.id;
             this.credit = json.credit;
             this.debit = json.debit;

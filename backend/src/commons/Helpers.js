@@ -20,4 +20,23 @@ class Attributes {
     }
 }
 exports.Attributes = Attributes;
+class InnerJson {
+    static IsValid(json, requiredAttributes) {
+        let result = false;
+        let count = 0;
+        if (json != undefined && json != '' && json != null) {
+            result = true;
+        }
+        requiredAttributes.forEach(element => {
+            if (json.hasOwnProperty(element)) {
+                result = true;
+                count++;
+            }
+        });
+        if (count <= 0)
+            result = false;
+        return result;
+    }
+}
+exports.InnerJson = InnerJson;
 //# sourceMappingURL=Helpers.js.map
