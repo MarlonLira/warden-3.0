@@ -13,7 +13,7 @@ class Attributes {
   }
 
   static ReturnIfValid(value : any){
-    let result = null;
+    let result = undefined;
     if (value != undefined && value != '' && value != null) {
       result = value;
     }

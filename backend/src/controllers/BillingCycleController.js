@@ -1,16 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const sequelize_1 = require("sequelize");
+const sequelize_2 = require("sequelize");
 const BillingCycle_1 = require("../models/BillingCycle");
 const Http_1 = require("../commons/enums/Http");
 const Http_2 = require("../commons/functions/Http");
 const Helpers_1 = require("../commons/Helpers");
+const InnerDate_1 = require("../models/InnerDate");
 class BillingCycleController extends BillingCycle_1.BillingCycle {
     Save(response) {
         return new Promise((resolve, reject) => {
             BillingCycle_1.BillingCycle.create({
                 credit: Helpers_1.Attributes.ReturnIfValid(this.credit),
                 debit: Helpers_1.Attributes.ReturnIfValid(this.debit),
-                date: Helpers_1.Attributes.ReturnIfValid(this.date),
+                date: Helpers_1.Attributes.ReturnIfValid(this.date.getFullDate()),
                 month: this.month
             }).then(result => {
                 response.status(Http_1.HttpCode.Ok).send(Http_2.GetHttpMessage(Http_1.HttpCode.Ok, null, result));
@@ -22,13 +25,23 @@ class BillingCycleController extends BillingCycle_1.BillingCycle {
         });
     }
     Search(response, isAll) {
-        let currentMonth = new Date().getMonth() + 1;
-        return new Promise((resolve, reject) => {
-            BillingCycle_1.BillingCycle.scope('public').findAll({
-                where: {
-                    month: currentMonth
+        let date = new InnerDate_1.InnerDate().Now();
+        console.log(date);
+        let query = {};
+        if (!isAll) {
+            query.attributes = [
+                [sequelize_1.Sequelize.fn('SUM', sequelize_1.Sequelize.col('credit')), 'credit'],
+                [sequelize_1.Sequelize.fn('SUM', sequelize_1.Sequelize.col('debit')), 'debit']
+            ];
+            query.where = {
+                month: date.Month,
+                date: {
+                    [sequelize_2.Op.like]: `${date.Year}%`
                 }
-            })
+            };
+        }
+        return new Promise((resolve, reject) => {
+            BillingCycle_1.BillingCycle.findAll(query)
                 .then(result => {
                 if (result != null && result != undefined) {
                     response.status(Http_1.HttpCode.Ok).send(result);
