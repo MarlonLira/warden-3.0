@@ -6,39 +6,37 @@ import { BillingCycle } from '../models/BillingCycle';
 import { HttpCode } from '../commons/enums/Http';
 import { GetHttpMessage } from '../commons/functions/Http';
 import { Attributes } from '../commons/Helpers';
-import { InnerDate }from '../models/InnerDate';
+import { InnerDate } from '../models/InnerDate';
 
 export default class BillingCycleController extends BillingCycle implements IEntitie {
   Save(response?: any) {
     return new Promise((resolve, reject) => {
       BillingCycle.create({
-        credit: Attributes.ReturnIfValid(this.credit),
-        debit: Attributes.ReturnIfValid(this.debit),
-        date: Attributes.ReturnIfValid(this.date.getFullDate()),
-        month: this.month
+        credit: this.credit,
+        debit: this.debit,
+        date: this.date
       }).then(result => {
         response.status(HttpCode.Ok).send(GetHttpMessage(HttpCode.Ok, null, result));
         resolve(result);
       }).catch(error => {
-        console.error(error)
+        console.error(error.message);
         resolve(response.status(HttpCode.Internal_Server_Error).send(GetHttpMessage(HttpCode.Internal_Server_Error)));
       })
     })
   }
+
   Search(response?: any, isAll?: boolean) {
     let date = new InnerDate().Now();
-    console.log(date);
     let query: any = {};
 
-    if(!isAll){
+    if (!isAll) {
       query.attributes = [
-        [Sequelize.fn('SUM', Sequelize.col('credit')), 'credit'], 
+        [Sequelize.fn('SUM', Sequelize.col('credit')), 'credit'],
         [Sequelize.fn('SUM', Sequelize.col('debit')), 'debit']
       ];
       query.where = {
-        month: date.Month,
-        date:{
-          [Op.like]: `${date.Year}%`     
+        date: {
+          [Op.like]: `${date.Year}-${date.Month}%`
         }
       }
     }
@@ -46,11 +44,11 @@ export default class BillingCycleController extends BillingCycle implements IEnt
     return new Promise((resolve, reject) => {
       BillingCycle.findAll(query)
         .then(result => {
-          if (result != null && result != undefined){
+          if (result != null && result != undefined) {
             response.status(HttpCode.Ok).send(result);
             resolve(result);
           }
-          else{
+          else {
             resolve(response.status(HttpCode.Not_Found).send(GetHttpMessage(HttpCode.Not_Found)));
           }
           resolve(result);

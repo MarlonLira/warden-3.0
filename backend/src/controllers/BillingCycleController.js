@@ -5,28 +5,25 @@ const sequelize_2 = require("sequelize");
 const BillingCycle_1 = require("../models/BillingCycle");
 const Http_1 = require("../commons/enums/Http");
 const Http_2 = require("../commons/functions/Http");
-const Helpers_1 = require("../commons/Helpers");
 const InnerDate_1 = require("../models/InnerDate");
 class BillingCycleController extends BillingCycle_1.BillingCycle {
     Save(response) {
         return new Promise((resolve, reject) => {
             BillingCycle_1.BillingCycle.create({
-                credit: Helpers_1.Attributes.ReturnIfValid(this.credit),
-                debit: Helpers_1.Attributes.ReturnIfValid(this.debit),
-                date: Helpers_1.Attributes.ReturnIfValid(this.date.getFullDate()),
-                month: this.month
+                credit: this.credit,
+                debit: this.debit,
+                date: this.date
             }).then(result => {
                 response.status(Http_1.HttpCode.Ok).send(Http_2.GetHttpMessage(Http_1.HttpCode.Ok, null, result));
                 resolve(result);
             }).catch(error => {
-                console.error(error);
+                console.error(error.message);
                 resolve(response.status(Http_1.HttpCode.Internal_Server_Error).send(Http_2.GetHttpMessage(Http_1.HttpCode.Internal_Server_Error)));
             });
         });
     }
     Search(response, isAll) {
         let date = new InnerDate_1.InnerDate().Now();
-        console.log(date);
         let query = {};
         if (!isAll) {
             query.attributes = [
@@ -34,9 +31,8 @@ class BillingCycleController extends BillingCycle_1.BillingCycle {
                 [sequelize_1.Sequelize.fn('SUM', sequelize_1.Sequelize.col('debit')), 'debit']
             ];
             query.where = {
-                month: date.Month,
                 date: {
-                    [sequelize_2.Op.like]: `${date.Year}%`
+                    [sequelize_2.Op.like]: `${date.Year}-${date.Month}%`
                 }
             };
         }
