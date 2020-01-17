@@ -8,10 +8,9 @@ class Attributes {
     return (value != undefined && value != '' && value != null) ? true : false;
   }
 
-  static ReturnIfValid(value : any){
-    return (value != undefined && value != '' && value != null) ? value : undefined;
+  static ReturnIfValid(value : any, returnIfNotValid : any = undefined){
+    return (value != undefined && value != '' && value != null) ? value : returnIfNotValid;
   }
-  
 }
 
 class InnerJson{

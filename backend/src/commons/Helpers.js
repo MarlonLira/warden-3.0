@@ -7,8 +7,8 @@ class Attributes {
     static IsValid(value) {
         return (value != undefined && value != '' && value != null) ? true : false;
     }
-    static ReturnIfValid(value) {
-        return (value != undefined && value != '' && value != null) ? value : undefined;
+    static ReturnIfValid(value, returnIfNotValid = undefined) {
+        return (value != undefined && value != '' && value != null) ? value : returnIfNotValid;
     }
 }
 exports.Attributes = Attributes;

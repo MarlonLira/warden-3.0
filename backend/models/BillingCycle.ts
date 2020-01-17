@@ -9,16 +9,14 @@ class BillingCycle extends Model {
   id!: number;
   credit!: number;
   debit!: number;
-  date!: InnerDate;
-  //test: string;
+  date!: string;
 
   constructor(json?: any) {
     super();
-    this.id = Attributes.IsValid(json.id) ? json.id : undefined;
-    this.credit = Attributes.IsValid(json.credit) ? json.credit : 0;
-    this.debit = Attributes.IsValid(json.debit) ? json.debit : 0;
-    this.date = Attributes.IsValid(json.date) ? new InnerDate(json.date) : undefined;
-    //this.test = new InnerDate(json.date).FullDate;
+    this.id = Attributes.ReturnIfValid(json.id);
+    this.credit = Attributes.ReturnIfValid(json.credit, 0) ? json.credit : 0;
+    this.debit = Attributes.ReturnIfValid(json.debit, 0);
+    this.date = Attributes.ReturnIfValid(json.date);
   }
 }
 
@@ -36,13 +34,8 @@ BillingCycle.init({
   },
   date: {
     type: new DataTypes.STRING(10),
-    allowNull: true
+    allowNull: false
   }
-  // ,
-  // test: {
-  //   type: new DataTypes.STRING,
-  //   allowNull: false
-  // }
 }, {
   sequelize: _instance,
   tableName: 'billingCycle',
@@ -56,6 +49,6 @@ BillingCycle.init({
   }
 });
 
-BillingCycle.sync({ force: true });
+BillingCycle.sync({ force: false });
 
 export { BillingCycle }

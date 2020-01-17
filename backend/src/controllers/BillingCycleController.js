@@ -5,20 +5,14 @@ const sequelize_2 = require("sequelize");
 const BillingCycle_1 = require("../models/BillingCycle");
 const Http_1 = require("../commons/enums/Http");
 const Http_2 = require("../commons/functions/Http");
-const Helpers_1 = require("../commons/Helpers");
 const InnerDate_1 = require("../models/InnerDate");
 class BillingCycleController extends BillingCycle_1.BillingCycle {
     Save(response) {
-        var _date = this.date.FullDate;
-        console.log(typeof (this.test));
-        console.log(this.test);
         return new Promise((resolve, reject) => {
-            console.log(this.test);
             BillingCycle_1.BillingCycle.create({
-                teste: Helpers_1.Attributes.ReturnIfValid(this.test),
-                credit: Helpers_1.Attributes.ReturnIfValid(this.credit),
-                debit: Helpers_1.Attributes.ReturnIfValid(this.debit),
-                date: this.test
+                credit: this.credit,
+                debit: this.debit,
+                date: this.date
             }).then(result => {
                 response.status(Http_1.HttpCode.Ok).send(Http_2.GetHttpMessage(Http_1.HttpCode.Ok, null, result));
                 resolve(result);
@@ -31,7 +25,6 @@ class BillingCycleController extends BillingCycle_1.BillingCycle {
     Search(response, isAll) {
         let date = new InnerDate_1.InnerDate().Now();
         let query = {};
-        console.log(date);
         if (!isAll) {
             query.attributes = [
                 [sequelize_1.Sequelize.fn('SUM', sequelize_1.Sequelize.col('credit')), 'credit'],
