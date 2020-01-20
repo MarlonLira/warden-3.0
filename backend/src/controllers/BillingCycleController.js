@@ -25,6 +25,7 @@ class BillingCycleController extends BillingCycle_1.BillingCycle {
     Search(response, isAll) {
         let date = new InnerDate_1.InnerDate().Now();
         let query = {};
+        let _result = [];
         if (!isAll) {
             query.attributes = [
                 [sequelize_1.Sequelize.fn('SUM', sequelize_1.Sequelize.col('credit')), 'credit'],
@@ -40,8 +41,12 @@ class BillingCycleController extends BillingCycle_1.BillingCycle {
             BillingCycle_1.BillingCycle.findAll(query)
                 .then(result => {
                 if (result != null && result != undefined) {
-                    response.status(Http_1.HttpCode.Ok).send(result);
-                    resolve(result);
+                    result.forEach(found => {
+                        found.setDataValue('innerDate', new InnerDate_1.InnerDate(found.date));
+                        _result.push(found);
+                    });
+                    response.status(Http_1.HttpCode.Ok).send(_result);
+                    resolve(_result);
                 }
                 else {
                     resolve(response.status(Http_1.HttpCode.Not_Found).send(Http_2.GetHttpMessage(Http_1.HttpCode.Not_Found)));

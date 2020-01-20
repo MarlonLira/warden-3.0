@@ -17,8 +17,8 @@ class BillingCycleList extends Component {
       <tr key={bc.id}>
         <td>{bc.credit}</td>
         <td>{bc.debit}</td>
-        <td>{bc.date.Month}</td>
-        <td>{bc.date.Year}</td>
+        <td>{bc.innerDate.Month}</td>
+        <td>{bc.innerDate.Year}</td>
       </tr>
     ))
   }
