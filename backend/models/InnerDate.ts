@@ -35,11 +35,13 @@ class InnerDate {
   }
 }
 
-function LeftZero(value : any){
-  let result : string = value.toString();
-  console.log(value.toString());
-  if(value.toString().length == 1){
-    result = `0${value.toString()}`;
+function LeftZero(value: any) {
+  let result: string = ' ';
+  if (value != undefined && value != null) {
+    result = value.toString();
+    if (value.toString().length == 1) {
+      result = `0${value.toString()}`;
+    }
   }
   return result;
 }

@@ -10,6 +10,7 @@ class BillingCycle extends Model {
   credit!: number;
   debit!: number;
   date!: string;
+  innerDate!: InnerDate;
 
   constructor(json?: any) {
     super();
@@ -17,6 +18,7 @@ class BillingCycle extends Model {
     this.credit = Attributes.ReturnIfValid(json.credit, 0) ? json.credit : 0;
     this.debit = Attributes.ReturnIfValid(json.debit, 0);
     this.date = Attributes.ReturnIfValid(json.date);
+    this.innerDate = new InnerDate(Attributes.ReturnIfValid(json.date));
   }
 }
 

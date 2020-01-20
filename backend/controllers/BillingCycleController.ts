@@ -28,6 +28,7 @@ export default class BillingCycleController extends BillingCycle implements IEnt
   Search(response?: any, isAll?: boolean) {
     let date = new InnerDate().Now();
     let query: any = {};
+    let _result: any = [];
 
     if (!isAll) {
       query.attributes = [
@@ -45,8 +46,12 @@ export default class BillingCycleController extends BillingCycle implements IEnt
       BillingCycle.findAll(query)
         .then(result => {
           if (result != null && result != undefined) {
-            response.status(HttpCode.Ok).send(result);
-            resolve(result);
+            result.forEach(found => {
+              found.setDataValue('innerDate', new InnerDate(found.date))
+              _result.push(found);
+            })
+            response.status(HttpCode.Ok).send(_result);
+            resolve(_result);
           }
           else {
             resolve(response.status(HttpCode.Not_Found).send(GetHttpMessage(HttpCode.Not_Found)));

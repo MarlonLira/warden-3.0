@@ -29,10 +29,12 @@ class InnerDate {
 }
 exports.InnerDate = InnerDate;
 function LeftZero(value) {
-    let result = value.toString();
-    console.log(value.toString());
-    if (value.toString().length == 1) {
-        result = `0${value.toString()}`;
+    let result = ' ';
+    if (value != undefined && value != null) {
+        result = value.toString();
+        if (value.toString().length == 1) {
+            result = `0${value.toString()}`;
+        }
     }
     return result;
 }
