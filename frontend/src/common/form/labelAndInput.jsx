@@ -10,6 +10,8 @@ export default props => (
         placeholder={props.placeholder}
         readOnly={props.readOnly}
         type={props.type}
+        maxLength={props.maxLength}
+        required = {props.required}
       />
     </div>
   </Grid>

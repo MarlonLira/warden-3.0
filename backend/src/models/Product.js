@@ -32,12 +32,11 @@ Product.init({
         type: new sequelize_1.DataTypes.INTEGER
     },
     name: {
-        type: new sequelize_1.DataTypes.STRING(128),
+        type: new sequelize_1.DataTypes.STRING(30),
         allowNull: false
     },
     code: {
         type: new sequelize_1.DataTypes.STRING(12),
-        allowNull: false
     },
     amount: {
         type: new sequelize_1.DataTypes.INTEGER
@@ -49,14 +48,14 @@ Product.init({
         type: new sequelize_1.DataTypes.DATEONLY
     },
     obs: {
-        type: new sequelize_1.DataTypes.STRING(255)
+        type: new sequelize_1.DataTypes.STRING(20)
     }
 }, {
     sequelize: _instance,
     tableName: 'Product',
     scopes: {
         public: {
-            attributes: ['name', 'amount', 'date', 'validity']
+            attributes: ['name', 'code', 'amount', 'date', 'validity', 'obs']
         }
     }
 });
