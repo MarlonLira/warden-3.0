@@ -10,9 +10,6 @@ class Product extends sequelize_1.Model {
         super();
         if (json != undefined) {
             let _currentDate = new InnerDate_1.InnerDate().Now();
-            console.log(json.date);
-            console.log(_currentDate.FullDate);
-            console.log(json);
             this.id = Helpers_1.Attributes.ReturnIfValid(json.id);
             this.status = Helpers_1.Attributes.ReturnIfValid(json.status);
             this.name = Helpers_1.Attributes.ReturnIfValid(json.name);

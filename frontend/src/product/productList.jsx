@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { getList } from './productActions';
+import { getList, showUpdate, showDelete, showCreate } from './productActions';
 
 class ProductList extends Component {
 
   componentWillMount() {
     this.props.getList();
+    this.props.showCreate();
   }
 
   renderRows() {
@@ -19,6 +20,14 @@ class ProductList extends Component {
         <td>{pd.date}</td>
         <td>{pd.validity}</td>
         <td>{pd.obs}</td>
+        <td className='table-actions'>
+          <button className='btn btn-warning' onClick={() => this.props.showUpdate(pd)}>
+            <i className='fa fa-pencil'></i>
+          </button>
+          <button className='btn btn-danger' onClick={() => this.props.showDelete(pd)}>
+            <i className='fa fa-trash-o'></i>
+          </button>
+        </td>
       </tr>
     ))
   }
@@ -33,6 +42,7 @@ class ProductList extends Component {
               <th>Data</th>
               <th>Validade</th>
               <th>Obs.</th>
+              <th>Ações</th>
             </tr>
           </thead>
           <tbody>
@@ -45,5 +55,5 @@ class ProductList extends Component {
 }
 
 const mapStateToProps = state => ({ list: state.product.list });
-const mapDispatchToProps = dispatch => bindActionCreators({ getList }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ getList, showDelete, showUpdate, showCreate }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(ProductList);

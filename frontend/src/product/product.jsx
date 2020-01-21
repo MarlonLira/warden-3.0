@@ -10,7 +10,7 @@ import TabsContent from '../common/tab/tabsContent';
 import TabHeader from '../common/tab/tabHeader';
 import TabContent from '../common/tab/tabContent';
 import { selectTab, showTabs } from '../common/tab/tabActions';
-import { create } from './productActions';
+import { create, update, destroy, init } from './productActions';
 
 import List from './productList';
 import Form from './productForm';
@@ -28,7 +28,7 @@ class Product extends Component {
           <Tabs>
             <TabsHeader>
               <TabHeader label='Listar' icon='bars' target='tabList' />
-              <TabHeader label='Incluir' icon='plus' target='tabCreate' />
+              <TabHeader label='Incluir' icon='plus' target='tabCreate' onClick={() => init()} />
               <TabHeader label='Alterar' icon='pencil' target='tabUpdate' />
               <TabHeader label='Excluir' icon='trash-o' target='tabDelete' />
             </TabsHeader>
@@ -37,10 +37,17 @@ class Product extends Component {
                 <List />
               </TabContent>
               <TabContent id='tabCreate'>
-                <Form onSubmit={this.props.create} />
+                <Form onSubmit={this.props.create}
+                  submitLabel='Incluir' submitClass='primary' />
               </TabContent>
-              <TabContent id='tabUpdate'><h1>Alterar</h1></TabContent>
-              <TabContent id='tabDelete'><h1>Excluir</h1></TabContent>
+              <TabContent id='tabUpdate'>
+                <Form onSubmit={this.props.update}
+                  submitLabel='Atualizar' submitClass='warning' />
+              </TabContent>
+              <TabContent id='tabDelete'>
+                <Form onSubmit={this.props.destroy}
+                  submitLabel='Excluir' submitClass='danger' readOnly='true' />
+              </TabContent>
             </TabsContent>
           </Tabs>
         </Content>
@@ -49,5 +56,5 @@ class Product extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => bindActionCreators({ selectTab, showTabs, create }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ selectTab, showTabs, create, update, destroy }, dispatch);
 export default connect(null, mapDispatchToProps)(Product);

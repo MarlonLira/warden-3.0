@@ -22,9 +22,6 @@ class Product extends Model {
 		super()
 		if (json != undefined) {
 			let _currentDate = new InnerDate().Now();
-			console.log(json.date)
-			console.log(_currentDate.FullDate);
-			console.log(json);
 			this.id = Attributes.ReturnIfValid(json.id);
       this.status = Attributes.ReturnIfValid(json.status);
       this.name = Attributes.ReturnIfValid(json.name);

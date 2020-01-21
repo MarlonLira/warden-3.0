@@ -1,23 +1,27 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { reduxForm, Field } from 'redux-form';
+
+import { init } from './productActions';
 import labelAndInput from '../common/form/labelAndInput';
 
 class ProductForm extends Component {
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, readOnly } = this.props;
     return (
       <form role='form' onSubmit={handleSubmit}>
         <div className='box-body'>
           <Field name='name' component={labelAndInput}
-            label='Produto' cols='12 4'
+            label='Produto' cols='12 4' readOnly={readOnly}
             placeholder='Informe o nome do produto' type='text'
           />
           <Field name='code' component={labelAndInput}
-            label='Codigo' cols='12 4'
+            label='Codigo' cols='12 4' readOnly={readOnly}
             placeholder='Informe o codigo do produto' type='text'
           />
           <Field name='amount' component={labelAndInput}
-            label='Quantidade' cols='12 4'
+            label='Quantidade' cols='12 4' readOnly={readOnly}
             placeholder='Informe a quantidade do produto' type='number'
           />
           <Field name='date' component={labelAndInput}
@@ -25,20 +29,26 @@ class ProductForm extends Component {
             placeholder='Informe a data de cadastro do produto' type='date'
           />
           <Field name='validity' component={labelAndInput}
-            label='Validade' cols='12 4'
+            label='Validade' cols='12 4' readOnly={readOnly}
             placeholder='Informe a validade do produto' type='date'
           />
           <Field name='obs' component={labelAndInput}
-            label='Obs' cols='12 4'
+            label='Obs' cols='12 4' readOnly={readOnly}
             placeholder='Observações sobre o produto' type='text'
           />
         </div>
         <div className='box-footer'>
-          <button type='submit' className='btn btn-primary'>Submit</button>
+          <button type='submit' className={`btn btn-${this.props.submitClass}`}>
+            {this.props.submitLabel}
+          </button>
+          <button type='button' className='btn btn-default'
+            onClick={this.props.init}>Cancelar</button>
         </div>
       </form>
     )
   }
 }
 
-export default reduxForm({ form: 'productForm' })(ProductForm);
+ProductForm = reduxForm({ form: 'productForm' })(ProductForm);
+const mapDispatchToProps = dispatch => bindActionCreators({init}, dispatch);
+export default connect(null, mapDispatchToProps)(ProductForm);
