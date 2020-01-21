@@ -9,7 +9,8 @@ export default props => (
         className='form-control'
         placeholder={props.placeholder}
         readOnly={props.readOnly}
-        type={props.type} />
+        type={props.type}
+      />
     </div>
   </Grid>
 )

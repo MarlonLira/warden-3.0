@@ -10,24 +10,25 @@ import TabsContent from '../common/tab/tabsContent';
 import TabHeader from '../common/tab/tabHeader';
 import TabContent from '../common/tab/tabContent';
 import { selectTab, showTabs } from '../common/tab/tabActions';
-import { create, update, init, destroy } from './billingCycleActions';
+import { create, update, destroy, init } from './productActions';
 
-import List from './billingCycleList';
-import Form from '../billingCycle/billingCycleForm';
+import List from './productList';
+import Form from './productForm';
 
-class BillingCycle extends Component {
+class Product extends Component {
   componentWillMount() {
-    this.props.init();
+    this.props.selectTab('tabList');
+    this.props.showTabs('tabList', 'tabCreate');
   }
   render() {
     return (
       <div>
-        <ContentHeader title='Ciclos de Pagamentos' small='Cadastro' />
+        <ContentHeader title='Produtos' small='Cadastro' />
         <Content>
           <Tabs>
             <TabsHeader>
               <TabHeader label='Listar' icon='bars' target='tabList' />
-              <TabHeader label='Incluir' icon='plus' target='tabCreate' />
+              <TabHeader label='Incluir' icon='plus' target='tabCreate' onClick={() => init()} />
               <TabHeader label='Alterar' icon='pencil' target='tabUpdate' />
               <TabHeader label='Excluir' icon='trash-o' target='tabDelete' />
             </TabsHeader>
@@ -41,11 +42,11 @@ class BillingCycle extends Component {
               </TabContent>
               <TabContent id='tabUpdate'>
                 <Form onSubmit={this.props.update}
-                  submitLabel='Alterar' submitClass='warning' />
+                  submitLabel='Atualizar' submitClass='warning' />
               </TabContent>
               <TabContent id='tabDelete'>
-                <Form onSubmit={this.props.destroy} readOnly='true'
-                  submitLabel='Excluir' submitClass='danger' />
+                <Form onSubmit={this.props.destroy}
+                  submitLabel='Excluir' submitClass='danger' readOnly='true' />
               </TabContent>
             </TabsContent>
           </Tabs>
@@ -55,5 +56,5 @@ class BillingCycle extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => bindActionCreators({ selectTab, showTabs, create, init, update, destroy }, dispatch);
-export default connect(null, mapDispatchToProps)(BillingCycle);
+const mapDispatchToProps = dispatch => bindActionCreators({ selectTab, showTabs, create, update, destroy }, dispatch);
+export default connect(null, mapDispatchToProps)(Product);
