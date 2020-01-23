@@ -1,5 +1,7 @@
 import axios from 'axios';
-const BASE_URL = 'http://localhost:4001';
+import  Consts from '../consts';
+
+const BASE_URL = Consts.API_URL;
 
 export function getSummary() {
   return new Promise((resolve, reject) => {

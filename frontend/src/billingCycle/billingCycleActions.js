@@ -3,7 +3,9 @@ import { toastr } from 'react-redux-toastr';
 import { reset as resetForm, initialize } from 'redux-form';
 import { showTabs, selectTab } from '../common/tab/tabActions';
 import { ReturnIfValid }  from '../common/functions/properties';
-const BASE_URL = 'http://localhost:4001';
+import Consts from '../consts';
+
+const BASE_URL = Consts.API_URL;
 const INITIAL_VALUES = {};
 
 export function getList() {
@@ -48,6 +50,7 @@ function submit(values, method) {
 }
 
 export function showUpdate(billingCycle) {
+  console.log(billingCycle)
   return new Promise((resolve, reject) => {
     resolve([
       showTabs('tabUpdate'),
