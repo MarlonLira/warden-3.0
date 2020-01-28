@@ -6,6 +6,7 @@ import { getSummary } from '../dashboard/dashboardActions';
 import ContentHeader from '../common/template/contentHeader';
 import Content from '../common/template/content';
 import ValueBox from '../common/widget/valueBox';
+import InfoBox from '../common/widget/infoBox';
 import Row from '../common/layout/row';
 import {ReturnIfValid} from '../common/functions/properties';
 
@@ -43,6 +44,17 @@ class Dashboard extends Component {
               text='Valor Consolidado'
             />
           </Row>
+          <Row>
+            <InfoBox
+              cols='6 4'
+              color='green'
+              icon='flag-o'
+              value={`R$ 50`}
+              text='Meta'
+              percentValue={`${50}%`}
+              percentText={`${50}% da meta foi atingida!`}  
+            />
+          </Row>
         </Content>
       </div>
     );
@@ -50,7 +62,5 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = state => ({summary: state.dashboard.summary});
-//espalhar pros reducers
 const mapDispatchToProps = dispatch => bindActionCreators({getSummary}, dispatch);
-
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

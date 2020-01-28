@@ -1,19 +1,21 @@
 import axios from 'axios';
 import { toastr } from 'react-redux-toastr';
-import { reset as resetForm, initialize } from 'redux-form';
+import { initialize } from 'redux-form';
 import { showTabs, selectTab } from '../common/tab/tabActions';
-import { ReturnIfValid }  from '../common/functions/properties';
+import { ReturnIfValid, GetDateNow } from '../common/functions/properties';
 import Consts from '../consts';
 
 const BASE_URL = Consts.API_URL;
+const CURRENT_DATE = GetDateNow().FullDate;
 const INITIAL_VALUES = {};
 
 export function getList() {
   return new Promise((resolve, reject) => {
-    axios.get(`${BASE_URL}/billingCycles`)
+    axios.get(`${BASE_URL}/clients`)
       .then(request => {
+        showCreate();
         resolve({
-          type: 'BILLING_CYCLES_FETCHED',
+          type: 'CLIENT_FETCHED',
           payload: request
         });
       });
@@ -35,9 +37,9 @@ export function destroy(values) {
 function submit(values, method) {
   return new Promise((resolve, reject) => {
     const id = (method == 'delete' || method == 'get') ? ReturnIfValid(values.id, '') : '';
-    axios[method](`${BASE_URL}/billingCycle/${id}`, values)
+    axios[method](`${BASE_URL}/client/${id}`, values)
       .then(request => {
-        toastr.success('Sucesso', 'OperaÃ§Ã£o realizada com sucesso.');
+        toastr.success('Sucesso', 'Operação realizada com sucesso.');
         resolve(init());
       })
       .catch(error => {
@@ -49,22 +51,29 @@ function submit(values, method) {
   })
 }
 
-export function showUpdate(billingCycle) {
-  console.log(billingCycle)
+export function showUpdate(client) {
   return new Promise((resolve, reject) => {
     resolve([
       showTabs('tabUpdate'),
       selectTab('tabUpdate'),
-      initialize('billingCycleForm', billingCycle)
+      initialize('clientForm', client)
     ]);
   })
 }
-export function showDelete(billingCycle) {
+export function showDelete(client) {
   return new Promise((resolve, reject) => {
     resolve([
       showTabs('tabDelete'),
       selectTab('tabDelete'),
-      initialize('billingCycleForm', billingCycle)
+      initialize('clientForm', client)
+    ]);
+  })
+}
+
+export function showCreate() {
+  return new Promise((resolve, reject) => {
+    resolve([
+      initialize('clientForm', INITIAL_VALUES)
     ]);
   })
 }
@@ -75,7 +84,7 @@ export function init() {
       showTabs('tabList', 'tabCreate'),
       selectTab('tabList'),
       getList(),
-      initialize('billingCycleForm', INITIAL_VALUES)
+      initialize('clientForm', INITIAL_VALUES)
     ]);
   })
 }

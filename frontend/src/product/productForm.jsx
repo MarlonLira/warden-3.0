@@ -12,16 +12,16 @@ class ProductForm extends Component {
     return (
       <form role='form' onSubmit={handleSubmit}>
         <div className='box-body'>
-          <Field name='name' component={labelAndInput}
-            label='Produto' cols='12 4' readOnly={readOnly}
+          <Field name='name' component={labelAndInput} required = 'true'
+            label='Produto' cols='12 4' readOnly={readOnly} maxLength='30'
             placeholder='Informe o nome do produto' type='text'
           />
           <Field name='code' component={labelAndInput}
-            label='Codigo' cols='12 4' readOnly={readOnly}
+            label='Codigo' cols='12 4' readOnly={readOnly} maxLength='12'
             placeholder='Informe o codigo do produto' type='text'
           />
           <Field name='amount' component={labelAndInput}
-            label='Quantidade' cols='12 4' readOnly={readOnly}
+            label='Quantidade' cols='12 4' readOnly={readOnly} required = 'true'
             placeholder='Informe a quantidade do produto' type='number'
           />
           <Field name='date' component={labelAndInput}
@@ -33,7 +33,7 @@ class ProductForm extends Component {
             placeholder='Informe a validade do produto' type='date'
           />
           <Field name='obs' component={labelAndInput}
-            label='Obs' cols='12 4' readOnly={readOnly}
+            label='Obs' cols='12 4' readOnly={readOnly} maxLength='20'
             placeholder='Observações sobre o produto' type='text'
           />
         </div>
