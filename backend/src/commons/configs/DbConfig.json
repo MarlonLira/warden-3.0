@@ -8,10 +8,10 @@
     },
     "MSSQL": {
         "host": "DESKTOP-O8EQSGP",
-        "port": 1433,
-        "username": "sa",
         "password": "Root1526",
-        "schema": "warden"
+        "port": 1433,
+        "schema": "warden",
+        "username": "sa"
     },
     "PostgreSQL": {
         "host": "ec2-107-21-110-75.compute-1.amazonaws.com",
