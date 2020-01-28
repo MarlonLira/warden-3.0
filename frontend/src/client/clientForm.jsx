@@ -41,6 +41,6 @@ class ClientForm extends Component {
   }
 }
 
-ClientForm = reduxForm({ form: 'ClientForm' })(ClientForm);
+ClientForm = reduxForm({ form: 'clientForm' })(ClientForm);
 const mapDispatchToProps = dispatch => bindActionCreators({ init }, dispatch);
 export default connect(null, mapDispatchToProps)(ClientForm);

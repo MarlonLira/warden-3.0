@@ -14,7 +14,6 @@ export function getList() {
     axios.get(`${BASE_URL}/clients`)
       .then(request => {
         showCreate();
-        console.log(request)
         resolve({
           type: 'CLIENT_FETCHED',
           payload: request
