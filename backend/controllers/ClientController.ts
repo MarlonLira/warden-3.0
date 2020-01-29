@@ -43,6 +43,8 @@ export default class ClientController extends Client implements IEntitie {
 					query = Querying.ReturnLikeQuery(this, ['status', 'name', 'registryCode']);
 				}
 			}
+			console.log(this.id)
+			console.log(query)
 			Client.scope("public").findAll({
 				where: query
 			})

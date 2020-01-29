@@ -2,20 +2,24 @@ import { Model, DataTypes } from 'sequelize';
 import { DbInstance } from '../context/DbContext';
 import { Attributes } from '../commons/Helpers';
 import { InnerDate } from '../models/InnerDate';
+import Client from '../controllers/ClientController';
 
 var _instance = new DbInstance().getInstance();
 
 class BillingCycle extends Model {
   id!: number;
+  clientId!: number;
   credit!: number;
   debit!: number;
   date!: string;
+  client!: any;
   innerDate!: InnerDate;
 
   constructor(json?: any) {
     super();
     this.id = Attributes.ReturnIfValid(json.id);
-    this.credit = Attributes.ReturnIfValid(json.credit, 0) ? json.credit : 0;
+    this.clientId = Attributes.ReturnIfValid(json.clientId);
+    this.credit = Attributes.ReturnIfValid(json.credit, 0);
     this.debit = Attributes.ReturnIfValid(json.debit, 0);
     this.date = Attributes.ReturnIfValid(json.date);
     this.innerDate = new InnerDate(Attributes.ReturnIfValid(json.date));
@@ -37,13 +41,17 @@ BillingCycle.init({
   date: {
     type: new DataTypes.STRING(10),
     allowNull: false
+  },
+  clientId: {
+    type: new DataTypes.INTEGER,
+    allowNull: true
   }
 }, {
   sequelize: _instance,
   tableName: 'billingCycle',
   scopes: {
     public: {
-      attributes: ['credit', 'debit', 'date']
+      attributes: ['clientId','credit', 'debit', 'date']
     },
     consolidated: {
       attributes: ['credit', 'debit']

@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 const dbConfig = require("../commons/configs/DbConfig.json");
-var _dbConfig = dbConfig.MSSQL;
+var _dbConfig = dbConfig.MySql;
 class DbContext {
     constructor() {
         this.userName = _dbConfig.username;
@@ -15,7 +15,7 @@ class DbContext {
         const sequelize = new sequelize_1.Sequelize(this.Schema, this.userName, this.password, {
             port: this.port,
             host: this.host,
-            dialect: 'mssql',
+            dialect: 'mysql',
             ssl: true
         });
         return sequelize;

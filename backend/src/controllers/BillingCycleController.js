@@ -7,19 +7,21 @@ const Http_1 = require("../commons/enums/Http");
 const Http_2 = require("../commons/functions/Http");
 const Helpers_1 = require("../commons/Helpers");
 const InnerDate_1 = require("../models/InnerDate");
+const Client_1 = require("../models/Client");
 class BillingCycleController extends BillingCycle_1.BillingCycle {
     Save(response) {
         return new Promise((resolve, reject) => {
             BillingCycle_1.BillingCycle.create({
                 credit: this.credit,
                 debit: this.debit,
-                date: this.date
+                date: this.date,
+                clientId: this.clientId
             }).then(result => {
-                response.status(Http_1.HttpCode.Ok).send(Http_2.GetHttpMessage(Http_1.HttpCode.Ok, `${BillingCycle_1.BillingCycle.name} cadastrado`, result));
+                response.status(Http_1.HttpCode.Ok).send(Http_2.GetHttpMessage(Http_1.HttpCode.Ok, BillingCycle_1.BillingCycle, result));
                 resolve(result);
             }).catch(error => {
                 console.error(error.message);
-                resolve(response.status(Http_1.HttpCode.Internal_Server_Error).send(Http_2.GetHttpMessage(Http_1.HttpCode.Internal_Server_Error)));
+                resolve(response.status(Http_1.HttpCode.Internal_Server_Error).send(Http_2.GetHttpMessage(Http_1.HttpCode.Internal_Server_Error, BillingCycle_1.BillingCycle, error)));
             });
         });
     }
@@ -27,6 +29,7 @@ class BillingCycleController extends BillingCycle_1.BillingCycle {
         let date = new InnerDate_1.InnerDate().Now();
         let query = {};
         let _result = [];
+        let __;
         if (!isAll) {
             query.attributes = [
                 [sequelize_1.Sequelize.fn('SUM', sequelize_1.Sequelize.col('credit')), 'credit'],
@@ -42,12 +45,26 @@ class BillingCycleController extends BillingCycle_1.BillingCycle {
             BillingCycle_1.BillingCycle.findAll(query)
                 .then(result => {
                 if (result != null && result != undefined) {
+                    let StartCount = 0;
+                    let EndCount = result.length;
                     result.forEach(found => {
-                        found.setDataValue('innerDate', new InnerDate_1.InnerDate(found.date));
-                        _result.push(found);
+                        __ = Client_1.Client.findOne({
+                            where: {
+                                id: found.clientId
+                            }
+                        }).then(request => {
+                            StartCount++;
+                            found.setDataValue('client', request);
+                            found.setDataValue('innerDate', new InnerDate_1.InnerDate(found.date));
+                            _result.push(found);
+                            console.log(`start: ${StartCount}`);
+                            console.log(EndCount);
+                            if (StartCount == EndCount) {
+                                response.status(Http_1.HttpCode.Ok).send(_result);
+                                resolve(_result);
+                            }
+                        });
                     });
-                    response.status(Http_1.HttpCode.Ok).send(_result);
-                    resolve(_result);
                 }
                 else {
                     resolve(response.status(Http_1.HttpCode.Not_Found).send(Http_2.GetHttpMessage(Http_1.HttpCode.Not_Found)));
@@ -55,7 +72,7 @@ class BillingCycleController extends BillingCycle_1.BillingCycle {
                 resolve(result);
             }).catch(error => {
                 console.error(error);
-                resolve(response.status(Http_1.HttpCode.Internal_Server_Error).send(Http_2.GetHttpMessage(Http_1.HttpCode.Internal_Server_Error)));
+                resolve(response.status(Http_1.HttpCode.Internal_Server_Error).send(Http_2.GetHttpMessage(Http_1.HttpCode.Internal_Server_Error, BillingCycle_1.BillingCycle, error)));
             });
         });
     }
