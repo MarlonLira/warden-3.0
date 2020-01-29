@@ -2,18 +2,17 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 const DbContext_1 = require("../context/DbContext");
+const Helpers_1 = require("../commons/Helpers");
 var _instance = new DbContext_1.DbInstance().getInstance();
 class Client extends sequelize_1.Model {
     constructor(json) {
         super();
-        if (json != undefined) {
-            this.id = json.id;
-            this.firstName = json.firstName;
-            this.lastName = json.lastName;
-            this.status = json.status;
-            this.registryCode = json.registryCode;
-            this.phone = json.phone;
-        }
+        this.id = Helpers_1.Attributes.ReturnIfValid(json.id);
+        this.name = Helpers_1.Attributes.ReturnIfValid(json.name);
+        this.status = Helpers_1.Attributes.ReturnIfValid(json.status);
+        this.registryCode = Helpers_1.Attributes.ReturnIfValid(json.registryCode);
+        this.phone = Helpers_1.Attributes.ReturnIfValid(json.phone);
+        this.email = Helpers_1.Attributes.ReturnIfValid(json.email);
     }
 }
 exports.Client = Client;
@@ -26,12 +25,8 @@ Client.init({
     status: {
         type: new sequelize_1.DataTypes.INTEGER
     },
-    firstName: {
-        type: new sequelize_1.DataTypes.STRING(128),
-        allowNull: false
-    },
-    lastName: {
-        type: new sequelize_1.DataTypes.STRING(128),
+    name: {
+        type: new sequelize_1.DataTypes.STRING(30),
         allowNull: false
     },
     registryCode: {
@@ -40,13 +35,16 @@ Client.init({
     },
     phone: {
         type: new sequelize_1.DataTypes.STRING(12)
+    },
+    email: {
+        type: new sequelize_1.DataTypes.STRING(50)
     }
 }, {
     sequelize: _instance,
     tableName: 'Client',
     scopes: {
         public: {
-            attributes: ['id', 'firstName', 'lastName', 'phone', 'registryCode']
+            attributes: ['id', 'name', 'phone', 'email', 'registryCode']
         }
     }
 });

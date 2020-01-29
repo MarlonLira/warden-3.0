@@ -6,12 +6,14 @@ import DashboardReducer from '../dashboard/dashboardReducer';
 import TabReducer from '../common/tab/tabReducer';
 import BillingCycleReducer from '../billingCycle/billingCycleReducer';
 import ProductReducer from '../product/productReducer';
+import ClientReducer from '../client/clientReducer';
 
 const rootReducer = combineReducers({
   dashboard: DashboardReducer,
   tab:TabReducer,
   billingCycle: BillingCycleReducer,
   product: ProductReducer,
+  client: ClientReducer,
   form: formReducer,
   toastr: toastrReducer
 });
