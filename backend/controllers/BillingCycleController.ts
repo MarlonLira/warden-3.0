@@ -31,7 +31,6 @@ export default class BillingCycleController extends BillingCycle implements IEnt
     let date = new InnerDate().Now();
     let query: any = {};
     let _result: any = [];
-    let __: any;
 
     if (!isAll) {
       query.attributes = [
@@ -52,7 +51,7 @@ export default class BillingCycleController extends BillingCycle implements IEnt
             let StartCount = 0;
             let EndCount = result.length
             result.forEach(found => {
-              __ = Client.findOne(
+              Client.findOne(
                 {
                   where: {
                     id: found.clientId
@@ -63,14 +62,11 @@ export default class BillingCycleController extends BillingCycle implements IEnt
                 found.setDataValue('client', request);
                 found.setDataValue('innerDate', new InnerDate(found.date));
                 _result.push(found);
-                console.log(`start: ${StartCount}`)
-                console.log(EndCount)
 
                 if (StartCount == EndCount) {
                   response.status(HttpCode.Ok).send(_result);
                   resolve(_result);
                 }
-
               })
             })
           }

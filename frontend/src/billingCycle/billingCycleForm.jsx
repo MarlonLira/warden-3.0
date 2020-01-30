@@ -13,6 +13,10 @@ class BillingCycleForm extends Component {
     return (
       <form role='form' onSubmit={handleSubmit}>
         <div className='box-body'>
+          <Field name='clientId' component={labelAndInput}
+            label='Cliente' cols='12 4' readOnly={readOnly}
+            placeholder='Informe o id do Cliente' type='number'
+          />
           <Field name='credit' component={labelAndInput}
             label='Credito' cols='12 4' readOnly={readOnly}
             placeholder='Informe o credito' type='number'

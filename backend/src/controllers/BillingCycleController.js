@@ -29,7 +29,6 @@ class BillingCycleController extends BillingCycle_1.BillingCycle {
         let date = new InnerDate_1.InnerDate().Now();
         let query = {};
         let _result = [];
-        let __;
         if (!isAll) {
             query.attributes = [
                 [sequelize_1.Sequelize.fn('SUM', sequelize_1.Sequelize.col('credit')), 'credit'],
@@ -48,7 +47,7 @@ class BillingCycleController extends BillingCycle_1.BillingCycle {
                     let StartCount = 0;
                     let EndCount = result.length;
                     result.forEach(found => {
-                        __ = Client_1.Client.findOne({
+                        Client_1.Client.findOne({
                             where: {
                                 id: found.clientId
                             }
@@ -57,8 +56,6 @@ class BillingCycleController extends BillingCycle_1.BillingCycle {
                             found.setDataValue('client', request);
                             found.setDataValue('innerDate', new InnerDate_1.InnerDate(found.date));
                             _result.push(found);
-                            console.log(`start: ${StartCount}`);
-                            console.log(EndCount);
                             if (StartCount == EndCount) {
                                 response.status(Http_1.HttpCode.Ok).send(_result);
                                 resolve(_result);
