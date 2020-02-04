@@ -3,6 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 const DbContext_1 = require("../context/DbContext");
 const Helpers_1 = require("../commons/Helpers");
+const Config = require("../config.json");
+var _reSync = Config.Database.ForceSync;
 var _instance = new DbContext_1.DbInstance().getInstance();
 class Client extends sequelize_1.Model {
     constructor(json) {
@@ -48,5 +50,5 @@ Client.init({
         }
     }
 });
-Client.sync({ force: false });
+Client.sync({ force: _reSync });
 //# sourceMappingURL=Client.js.map

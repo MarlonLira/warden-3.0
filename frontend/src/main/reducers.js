@@ -7,6 +7,7 @@ import TabReducer from '../common/tab/tabReducer';
 import BillingCycleReducer from '../billingCycle/billingCycleReducer';
 import ProductReducer from '../product/productReducer';
 import ClientReducer from '../client/clientReducer';
+import SelectReducer from '../common/widget/select/selectReducer';
 
 const rootReducer = combineReducers({
   dashboard: DashboardReducer,
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
   product: ProductReducer,
   client: ClientReducer,
   form: formReducer,
-  toastr: toastrReducer
+  toastr: toastrReducer,
+  select: SelectReducer
 });
 
 export default rootReducer;

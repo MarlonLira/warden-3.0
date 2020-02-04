@@ -14,6 +14,7 @@ class BillingCycleList extends Component {
     const list = this.props.list || [];
     return list.map(bc => (
       <tr key={bc.id}>
+        <td>{bc.client.name}</td>
         <td>{bc.credit}</td>
         <td>{bc.debit}</td>
         <td>{bc.innerDate.Month}</td>
@@ -35,6 +36,7 @@ class BillingCycleList extends Component {
         <table className='table'>
           <thead>
             <tr>
+              <th>Cliente</th>
               <th>Credito</th>
               <th>Debito</th>
               <th>Mês</th>

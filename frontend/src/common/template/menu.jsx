@@ -14,5 +14,8 @@ export default props => (
       <MenuItem path='#clients'
         label='Clientes' icon='users' />
     </MenuTree>
+    <MenuTree label='Componentes' icon='archive'>
+      <MenuItem label='Acessar' icon='angle-right' path='#components'/>
+    </MenuTree>
   </ul>
 );
