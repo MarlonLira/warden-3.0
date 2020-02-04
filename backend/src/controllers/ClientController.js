@@ -41,8 +41,6 @@ class ClientController extends Client_1.Client {
                     query = Helpers_1.Querying.ReturnLikeQuery(this, ['status', 'name', 'registryCode']);
                 }
             }
-            console.log(this.id);
-            console.log(query);
             Client_1.Client.scope("public").findAll({
                 where: query
             })

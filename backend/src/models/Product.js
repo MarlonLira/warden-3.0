@@ -4,6 +4,8 @@ const sequelize_1 = require("sequelize");
 const DbContext_1 = require("../context/DbContext");
 const Helpers_1 = require("../commons/Helpers");
 const InnerDate_1 = require("../models/InnerDate");
+const Config = require("../config.json");
+var _reSync = Config.Database.ForceSync;
 var _instance = new DbContext_1.DbInstance().getInstance();
 class Product extends sequelize_1.Model {
     constructor(json) {
@@ -59,5 +61,5 @@ Product.init({
         }
     }
 });
-Product.sync({ force: false });
+Product.sync({ force: _reSync });
 //# sourceMappingURL=Product.js.map

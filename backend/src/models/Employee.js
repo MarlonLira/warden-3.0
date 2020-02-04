@@ -2,6 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 const DbContext_1 = require("../context/DbContext");
+const Config = require("../config.json");
+var _reSync = Config.Database.ForceSync;
 var _instance = new DbContext_1.DbInstance().getInstance();
 class Employee extends sequelize_1.Model {
     constructor(json) {
@@ -49,5 +51,5 @@ Employee.init({
     sequelize: _instance,
     tableName: 'Employee',
 });
-Employee.sync({ force: false });
+Employee.sync({ force: _reSync });
 //# sourceMappingURL=Employee.js.map

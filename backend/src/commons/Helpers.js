@@ -14,7 +14,6 @@ class Querying {
                 };
             }
         });
-        console.log(query);
         return query;
     }
     static ReturnEqualQuery(entitie, properties) {
@@ -26,7 +25,6 @@ class Querying {
                 };
             }
         });
-        console.log(query);
         return query;
     }
 }
