@@ -1,4 +1,4 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 import { reducer as toastrReducer } from 'react-redux-toastr';
 
@@ -11,7 +11,7 @@ import SelectReducer from '../common/widget/select/selectReducer';
 
 const rootReducer = combineReducers({
   dashboard: DashboardReducer,
-  tab:TabReducer,
+  tab: TabReducer,
   billingCycle: BillingCycleReducer,
   product: ProductReducer,
   client: ClientReducer,

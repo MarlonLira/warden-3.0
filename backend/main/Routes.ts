@@ -3,10 +3,12 @@ import ClientController from '../controllers/ClientController';
 import EmployeeController from '../controllers/EmployeeController';
 import BillingCycleController from '../controllers/BillingCycleController';
 import ProductController from '../controllers/ProductController';
+import DashboardController from '../controllers/DashboardController';
 
-module.exports = function(server) {
-    Route.Register(server, ClientController);
-    Route.Register(server, EmployeeController);
-    Route.Register(server, BillingCycleController);
-    Route.Register(server, ProductController);
+module.exports = function (server) {
+  Route.Register(server, ClientController);
+  Route.Register(server, EmployeeController);
+  Route.Register(server, BillingCycleController);
+  Route.Register(server, ProductController);
+  Route.Register(server, DashboardController);
 }

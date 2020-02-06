@@ -8,14 +8,14 @@ import Content from '../common/template/content';
 import ValueBox from '../common/widget/valueBox';
 import InfoBox from '../common/widget/infoBox';
 import Row from '../common/layout/row';
-import {ReturnIfValid} from '../common/functions/properties';
+import { ReturnIfValid } from '../common/functions/properties';
 
 class Dashboard extends Component {
-  componentWillMount(){
+  componentWillMount() {
     this.props.getSummary();
   }
   render() {
-    const{credit, debit} = this.props.summary;
+    const { credit, debit } = this.props.summary;
     const consolidated = (ReturnIfValid(credit, 0) - ReturnIfValid(debit, 0));
     return (
       <div>
@@ -40,7 +40,7 @@ class Dashboard extends Component {
               cols='6 4'
               color='blue'
               icon='money'
-              value= {`R$ ${consolidated}`}
+              value={`R$ ${consolidated}`}
               text='Valor Consolidado'
             />
           </Row>
@@ -52,7 +52,7 @@ class Dashboard extends Component {
               value={`R$ 50`}
               text='Meta'
               percentValue={`${50}%`}
-              percentText={`${50}% da meta foi atingida!`}  
+              percentText={`${50}% da meta foi atingida!`}
             />
           </Row>
         </Content>
@@ -61,6 +61,6 @@ class Dashboard extends Component {
   }
 }
 
-const mapStateToProps = state => ({summary: state.dashboard.summary});
-const mapDispatchToProps = dispatch => bindActionCreators({getSummary}, dispatch);
+const mapStateToProps = state => ({ summary: state.dashboard.summary });
+const mapDispatchToProps = dispatch => bindActionCreators({ getSummary }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

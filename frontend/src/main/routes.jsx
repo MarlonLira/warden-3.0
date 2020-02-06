@@ -8,7 +8,7 @@ import Client from '../client/client';
 import Components from '../component/components';
 
 export default props => (
-  <Router history ={hashHistory}>
+  <Router history={hashHistory}>
     <Route path='/' component={Dashboard} />
     <Route path='/billingCycles' component={BillingCycle} />
     <Route path='/products' component={Product} />

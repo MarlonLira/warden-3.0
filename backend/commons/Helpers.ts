@@ -7,8 +7,8 @@ class Helpers {
 class Querying {
   static ReturnLikeQuery(entitie, properties: Array<string>) {
     let query: any = {};
-    properties.forEach(propertie =>{
-      if(Attributes.IsValid(entitie[propertie])){
+    properties.forEach(propertie => {
+      if (Attributes.IsValid(entitie[propertie])) {
         query[propertie] = {
           [Op.like]: `${entitie[propertie]}%`
         };
@@ -18,8 +18,8 @@ class Querying {
   }
   static ReturnEqualQuery(entitie, properties: Array<string>) {
     let query: any = {};
-    properties.forEach(propertie =>{
-      if(Attributes.IsValid(entitie[propertie])){
+    properties.forEach(propertie => {
+      if (Attributes.IsValid(entitie[propertie])) {
         query[propertie] = {
           [Op.eq]: entitie[propertie]
         };
@@ -39,7 +39,7 @@ class Attributes {
     return (value != undefined && value != '' && value != null) ? value : returnIfNotValid;
   }
 
-  
+
 }
 
 class InnerJson {

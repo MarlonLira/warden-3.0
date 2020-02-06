@@ -2,9 +2,13 @@
   "ExpandedNodes": [
     "",
     "\\backend",
-    "\\frontend\\src",
-    "\\frontend\\src\\client"
+    "\\backend\\controllers",
+    "\\frontend",
+    "\\frontend\\src\\common\\widget",
+    "\\frontend\\src\\common\\widget\\select",
+    "\\frontend\\src\\component",
+    "\\frontend\\src\\dashboard"
   ],
-  "SelectedNode": "\\backend\\commons",
+  "SelectedNode": "\\.gitignore",
   "PreviewInSolutionExplorer": false
 }

@@ -12,7 +12,7 @@ class ClientController extends Client_1.Client {
                 where: query
             }).then(result => {
                 if (result != undefined && result != null) {
-                    resolve(response.status(Http_1.HttpCode.Bad_Request).send(Http_2.GetHttpMessage(Http_1.HttpCode.Bad_Request, Client_1.Client, result)));
+                    resolve(response.status(Http_1.HttpCode.Bad_Request).send(result));
                 }
                 else {
                     Client_1.Client.create({
@@ -46,8 +46,7 @@ class ClientController extends Client_1.Client {
             })
                 .then(result => {
                 if (Helpers_1.Attributes.IsValid(result) && Helpers_1.Attributes.IsValid(result[0])) {
-                    response.status(Http_1.HttpCode.Ok).send(result);
-                    resolve(result);
+                    resolve(response.status(Http_1.HttpCode.Ok).send(result));
                 }
                 else {
                     resolve(response.status(Http_1.HttpCode.Not_Found).send(Http_2.GetHttpMessage(Http_1.HttpCode.Not_Found, Client_1.Client, '')));

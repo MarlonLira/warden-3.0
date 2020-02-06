@@ -17,7 +17,7 @@ class BillingCycleController extends BillingCycle_1.BillingCycle {
                 date: this.date,
                 clientId: this.clientId
             }).then(result => {
-                response.status(Http_1.HttpCode.Ok).send(Http_2.GetHttpMessage(Http_1.HttpCode.Ok, BillingCycle_1.BillingCycle, result));
+                response.status(Http_1.HttpCode.Ok).send(result);
                 resolve(result);
             }).catch(error => {
                 console.error(error.message);
@@ -58,8 +58,7 @@ class BillingCycleController extends BillingCycle_1.BillingCycle {
                                 found.setDataValue('innerDate', new InnerDate_1.InnerDate(found.date));
                                 _result.push(found);
                                 if (StartCount == EndCount) {
-                                    response.status(Http_1.HttpCode.Ok).send(_result);
-                                    resolve(_result);
+                                    resolve(response.status(Http_1.HttpCode.Ok).send(_result));
                                 }
                             });
                         });

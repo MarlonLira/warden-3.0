@@ -1,3 +1,3 @@
-var app = require('./commons/configs/Server');
-require('./commons/configs/Routes')(app);
+var app = require('./main/Server');
+require('./main/Routes')(app);
 //# sourceMappingURL=app.js.map

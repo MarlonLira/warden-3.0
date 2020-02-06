@@ -8,7 +8,7 @@ export function getList(list) {
 
   result = {
     "value": 1,
-    "name" : 'opt 1'
+    "name": 'opt 1'
   }
   console.log(result)
 

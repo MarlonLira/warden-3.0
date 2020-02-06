@@ -2,7 +2,7 @@ import axios from 'axios';
 import { toastr } from 'react-redux-toastr';
 import { reset as resetForm, initialize } from 'redux-form';
 import { showTabs, selectTab } from '../common/tab/tabActions';
-import { ReturnIfValid }  from '../common/functions/properties';
+import { ReturnIfValid } from '../common/functions/properties';
 import Consts from '../consts';
 
 const BASE_URL = Consts.API_URL;
