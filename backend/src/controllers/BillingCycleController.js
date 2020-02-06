@@ -44,24 +44,26 @@ class BillingCycleController extends BillingCycle_1.BillingCycle {
             BillingCycle_1.BillingCycle.findAll(query)
                 .then(result => {
                 if (result != null && result != undefined) {
-                    let StartCount = 0;
-                    let EndCount = result.length;
-                    result.forEach(found => {
-                        Client_1.Client.findOne({
-                            where: {
-                                id: found.clientId
-                            }
-                        }).then(request => {
-                            StartCount++;
-                            found.setDataValue('client', request);
-                            found.setDataValue('innerDate', new InnerDate_1.InnerDate(found.date));
-                            _result.push(found);
-                            if (StartCount == EndCount) {
-                                response.status(Http_1.HttpCode.Ok).send(_result);
-                                resolve(_result);
-                            }
+                    if (isAll) {
+                        let StartCount = 0;
+                        let EndCount = result.length;
+                        result.forEach(found => {
+                            Client_1.Client.findOne({
+                                where: {
+                                    id: found.clientId
+                                }
+                            }).then(request => {
+                                StartCount++;
+                                found.setDataValue('client', request);
+                                found.setDataValue('innerDate', new InnerDate_1.InnerDate(found.date));
+                                _result.push(found);
+                                if (StartCount == EndCount) {
+                                    response.status(Http_1.HttpCode.Ok).send(_result);
+                                    resolve(_result);
+                                }
+                            });
                         });
-                    });
+                    }
                 }
                 else {
                     resolve(response.status(Http_1.HttpCode.Not_Found).send(Http_2.GetHttpMessage(Http_1.HttpCode.Not_Found)));

@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\backend",
-    "\\backend\\context"
+    "\\frontend\\src",
+    "\\frontend\\src\\client"
   ],
-  "SelectedNode": "\\backend\\context\\DbContext.ts",
+  "SelectedNode": "\\backend\\commons",
   "PreviewInSolutionExplorer": false
 }

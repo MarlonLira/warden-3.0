@@ -12,7 +12,7 @@ export function getList(list) {
   }
   console.log(result)
 
-  result = list == undefined || list == null ? '' : list;
+  //result = list == undefined || list == null ? '' : list;
   return new Promise((resolve, reject) => {
     resolve({
       type: 'SELECT_FETCHED',
