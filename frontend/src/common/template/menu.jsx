@@ -4,18 +4,16 @@ import MenuItem from './menuItem';
 import MenuTree from './menuTree';
 
 export default props => (
-  <ul className='sidebar-menu'>
-    <MenuItem path='#' label='Dashboard' icon='dashboard' />
-    <MenuTree label='Cadastro' icon='edit'>
-      <MenuItem path='#billingCycles'
-        label='Ciclos de Pagamentos' icon='usd' />
-    <MenuItem path='#products'
-        label='Produtos' icon='cube' />
-      <MenuItem path='#clients'
-        label='Clientes' icon='users' />
-    </MenuTree>
-    <MenuTree label='Componentes' icon='archive'>
-      <MenuItem label='Acessar' icon='angle-right' path='#components'/>
-    </MenuTree>
-  </ul>
+  <nav className="mt-2">
+    <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+      <MenuTree path='#' label='Dashboard' icon='tachometer-alt' />
+      <MenuTree label='Componentes' icon='archive' path='#'>
+        <MenuItem label='Acessar' icon='angle-right' path='#components' />
+        <MenuItem label='Acessar' icon='angle-right' path='#components' />
+      </MenuTree>
+      <MenuTree label='Dashboard2' icon='tachometer-alt' >
+        <MenuItem label='Acessar' icon='circle' path='#' />
+      </MenuTree>
+    </ul>
+  </nav>
 );

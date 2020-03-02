@@ -29,6 +29,7 @@ class DashboardController extends Dashboard_1.default {
                 .then(result => {
                 this.credit = Helpers_1.Attributes.ReturnIfValid(result.credit, 0);
                 this.debit = Helpers_1.Attributes.ReturnIfValid(result.debit, 0);
+                this.goal = Helpers_1.Attributes.ReturnIfValid(500, 0);
                 resolve(response.status(Http_1.HttpCode.Ok).send(this));
             })
                 .catch(error => {
