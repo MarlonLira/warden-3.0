@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default props => (
-  <div>
+  <div id="SideLogBody">
     <a href="#" className="brand-link">
       <span id="SideLog" className='brand-image img-circle'><i className={`fa fa-${props.icon}`}></i></span>
       <span className="brand-text font-weight-light">{props.text}</span>
