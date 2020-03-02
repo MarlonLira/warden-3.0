@@ -1,4 +1,4 @@
-import '../common/template/dependencies';
+import '../common/template/dependenciesv2';
 import React from 'react';
 
 import Header from '../common/template/header';

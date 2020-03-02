@@ -12,7 +12,7 @@ class ProductForm extends Component {
     return (
       <form role='form' onSubmit={handleSubmit}>
         <div className='box-body'>
-          <Field name='name' component={labelAndInput} required = 'true'
+          <Field name='name' component={labelAndInput} required='true'
             label='Produto' cols='12 4' readOnly={readOnly} maxLength='30'
             placeholder='Informe o nome do produto' type='text'
           />
@@ -21,7 +21,7 @@ class ProductForm extends Component {
             placeholder='Informe o codigo do produto' type='text'
           />
           <Field name='amount' component={labelAndInput}
-            label='Quantidade' cols='12 4' readOnly={readOnly} required = 'true'
+            label='Quantidade' cols='12 4' readOnly={readOnly} required='true'
             placeholder='Informe a quantidade do produto' type='number'
           />
           <Field name='date' component={labelAndInput}
@@ -50,5 +50,5 @@ class ProductForm extends Component {
 }
 
 ProductForm = reduxForm({ form: 'productForm' })(ProductForm);
-const mapDispatchToProps = dispatch => bindActionCreators({init}, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ init }, dispatch);
 export default connect(null, mapDispatchToProps)(ProductForm);
