@@ -20,11 +20,11 @@ class ClientList extends Component {
         <td>{cl.phone}</td>
         <td>{cl.email}</td>
         <td className='table-actions'>
-          <button className='btn btn-warning' onClick={() => this.props.showUpdate(cl)}>
-            <i className='fa fa-pencil'></i>
+          <button type="button" className='btn btn-warning' onClick={() => this.props.showUpdate(cl)}>
+            <i className='fa fa-paint-brush'></i>
           </button>
-          <button className='btn btn-danger' onClick={() => this.props.showDelete(cl)}>
-            <i className='fa fa-trash-o'></i>
+          <button type="button" className='btn btn-danger' onClick={() => this.props.showDelete(cl)}>
+            <i className='fa fa-trash'></i>
           </button>
         </td>
       </tr>
