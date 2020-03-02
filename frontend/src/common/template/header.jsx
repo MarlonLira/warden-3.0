@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default props =>(
-  <header className='main-header'>
+  <header className='main-header navbar navbar-expand navbar-white navbar-light'>
     <a href='/#/' className='logo'>
       <span className='logo-mini'><b>My</b>W</span>
       <span className='logo-lg'>
