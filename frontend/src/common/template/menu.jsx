@@ -9,7 +9,7 @@ export default props => (
       <MenuTree path='#' label='Dashboard' icon='tachometer-alt' />
       <MenuTree label='Componentes' icon='archive' path='#'>
         <MenuItem label='Acessar' icon='angle-right' path='#components' />
-        <MenuItem label='Acessar' icon='angle-right' path='#components' />
+        <MenuItem label='Teste' icon='angle-right' path='#components' />
       </MenuTree>
       <MenuTree label='Dashboard2' icon='tachometer-alt' >
         <MenuItem label='Acessar' icon='circle' path='#' />

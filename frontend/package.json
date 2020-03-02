@@ -20,7 +20,7 @@
   "homepage": "https://github.com/MarlonLira/warden-3.0#readme",
   "devDependencies": {
     "admin-lte": "3.0.2",
-    "axios": "^0.15.3",
+    "axios": "0.19.2",
     "babel-core": "6.22.1",
     "babel-loader": "6.2.10",
     "babel-plugin-react-html-attrs": "2.0.0",
@@ -30,10 +30,7 @@
     "css-loader": "0.26.1",
     "extract-text-webpack-plugin": "1.0.1",
     "file-loader": "0.9.0",
-    "fortawesome": "5.12.0",
-    "ionicons": "5.0.0",
     "lodash": "4.17.4",
-    "popperjs": "2.0.6",
     "react": "15.4.2",
     "react-dom": "15.4.2",
     "react-redux": "4.4.6",
@@ -49,12 +46,6 @@
     "webpack-dev-server": "1.16.2"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.12.1",
-    "@fullcalendar/core": "^4.3.1",
-    "@fullcalendar/daygrid": "^4.3.0",
-    "@fullcalendar/react": "^4.3.0",
-    "@popperjs/core": "^2.0.6",
-    "http-server": "0.10.0",
-    "popper.js": "^1.16.1"
+    "http-server": "0.10.0"
   }
 }
