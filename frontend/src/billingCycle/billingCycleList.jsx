@@ -12,6 +12,7 @@ class BillingCycleList extends Component {
 
   renderRows() {
     const list = this.props.list || [];
+    console.log(list)
     return list.map(bc => (
       <tr key={bc.id}>
         <td>{bc.client.name}</td>

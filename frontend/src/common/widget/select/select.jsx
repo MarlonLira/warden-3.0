@@ -8,27 +8,23 @@ import { getList } from './selectActions';
 class Select extends Component {
 
   componentWillMount() {
-    this.props.getList();
+    this.props.getList(this.props.list)
   }
 
   renderOptions() {
-    const list = this.props.list || [];
-    console.log(list);
+    const _list = this.props.list || [];
 
-    var _result = '';
-    list.forEach(element => {
-      _result += <option value={element.value}>element.name</option>
-    });
-
-    return _result;
+    return _list.map(element => (
+      <option key={element.value} value={element.value}>{element.name}</option>
+    ))
   }
 
   render() {
-    const { name, cols } = this.props;
+    const { name, cols, list } = this.props;
     return (
       <Grid cols={cols}>
-        <select className="custom-select">
-          <option selected>{name}</option>
+        <select className="custom-select" defaultValue='DEFAULT' >
+          <option value='DEFAULT' disabled>{name}</option>
           {this.renderOptions()}
         </select>
       </Grid>

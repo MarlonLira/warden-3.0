@@ -5,13 +5,14 @@ import { reduxForm, Field } from 'redux-form';
 
 import { init } from './clientActions';
 import labelAndInput from '../common/form/labelAndInput';
+import Select from '../common/widget/select/select';
 
 class ClientForm extends Component {
     render() {
         const { handleSubmit, readOnly } = this.props;
         return (
             <form role='form' onSubmit={handleSubmit}>
-                <div className='box-body'>
+            <div className='box-body'>
                     <Field name='name' component={labelAndInput} required='true'
                         label='Nome' cols='12 4' readOnly={readOnly} maxLength='30'
                         placeholder='Informe o nome do cliente' type='text'

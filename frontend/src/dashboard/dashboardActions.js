@@ -7,7 +7,6 @@ export function getSummary() {
   return new Promise((resolve, reject) => {
     axios.get(`${BASE_URL}/dashboards`)
       .then(request => {
-        console.log(request);
         resolve({
           type: 'DASHBOARD_SUMMARY_FETCHED',
           payload: request

@@ -5,6 +5,7 @@ class Dashboard {
     constructor(json) {
         this.credit = Helpers_1.Attributes.ReturnIfValid(json.credit, 0);
         this.debit = Helpers_1.Attributes.ReturnIfValid(json.debit, 0);
+        this.goal = Helpers_1.Attributes.ReturnIfValid(json.goal, 0);
     }
 }
 exports.default = Dashboard;
