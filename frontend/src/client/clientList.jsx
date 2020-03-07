@@ -40,6 +40,7 @@ class ClientList extends Component {
               <th>CPF</th>
               <th>Telefone</th>
               <th>Email</th>
+              <th>Ações</th>
             </tr>
           </thead>
           <tbody>

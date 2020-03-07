@@ -13,7 +13,9 @@ class TabHeader extends Component {
       <If test={visible}>
         <li className={selected ? 'active' : ''}>
           <a href='javascript:;'
-            data-toggle='tab'
+            className='nav-link'
+            data-toggle='pill'
+            role='tab'
             onClick={() => this.props.selectTab(this.props.target)}
             data-target={this.props.target}>
             <i className={`fa fa-${this.props.icon}`}></i>{' ' + this.props.label}
