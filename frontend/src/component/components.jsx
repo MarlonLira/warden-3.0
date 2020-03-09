@@ -77,7 +77,7 @@ class Components extends Component {
                 </div>
                 <div id="tabCreate" className="tab-pane fade  show" role="tabpanel">
                   <form role="form">
-                    <div className="box-body">
+                    <div className="row">
                       <div className="col-xs-12 col-sm-4 ">
                         <div className="form-group">
                           <label>Nome</label>

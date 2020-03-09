@@ -12,7 +12,7 @@ class ClientForm extends Component {
         const { handleSubmit, readOnly } = this.props;
         return (
             <form role='form' onSubmit={handleSubmit}>
-            <div className='box-body'>
+            <div className='row'>
                     <Field name='name' component={labelAndInput} required='true'
                         label='Nome' cols='12 4' readOnly={readOnly} maxLength='30'
                         placeholder='Informe o nome do cliente' type='text'
