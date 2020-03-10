@@ -16,14 +16,11 @@ export function AccountValidation(values) {
 }
 
 function submit2(values, method) {
-  console.log('submit');
-  console.log(values);
+  //temporario/teste
+  window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`);
 }
 
 function submit(values, method) {
-  console.log('submit');
-  console.log(values);
-  
   return new Promise((resolve, reject) => {
     const id = (method == 'delete' || method == 'get') ? ReturnIfValid(values.id, 0) : '';
     axios[method](`${BASE_URL}/user/${id}`, values)
@@ -41,5 +38,13 @@ function submit(values, method) {
           type: 'ERROR'
         })
       })
+  })
+}
+
+export function init() {
+  return new Promise((resolve, reject) => {
+    resolve([
+      initialize('productForm', INITIAL_VALUES)
+    ]);
   })
 }

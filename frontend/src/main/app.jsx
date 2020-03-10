@@ -10,9 +10,11 @@ import Footer from '../common/template/footer';
 import Routes from './routes';
 import Messages from '../common/msg/messages';
 import Login from '../login/login';
-import If from '../common/operator/if';
 
-const isUser = true;
+import If from '../common/operator/if';
+import { AccountValidation } from '../login/loginActions';
+
+const isUser = false;
 export default props => (
   <div className='wrapper'>
     <If test={isUser == true}>
@@ -24,7 +26,7 @@ export default props => (
           </NavbarItems>
           <NavbarSearch />
         </Navbar>
-        <SideBar />
+        <SideBar onSubmit={AccountValidation} />
         <div className='content-wrapper'>
           <Routes />
         </div>
