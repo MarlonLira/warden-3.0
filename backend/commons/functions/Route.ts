@@ -10,11 +10,12 @@ class Route {
       new controller(req.body).Save(res).then(x => console.log());
     });
     router.get(`/${path}/:id`, (req, res) => {
-      req.body.id = req.params.id;
+      req.body = req.params;
       console.log(req.body);
       new controller(req.body).Search(res).then(x => console.log());
     });
     router.get(`/${path}s`, (req, res) => {
+      console.log(req.body);
       new controller(req.body).Search(res, true).then(x => console.log());
     });
     router.put(`/${path}`, (req, res) => {

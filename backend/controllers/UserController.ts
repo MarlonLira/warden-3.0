@@ -10,6 +10,7 @@ export default class UserController extends User implements IEntitie {
     throw new Error("Method not implemented.");
   }
   Search(response?: any, isAll?: boolean) {
+    console.log(this);
     return new Promise((resolve, reject) => {
       let query: any;
       if (!isAll) {

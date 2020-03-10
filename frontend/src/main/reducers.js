@@ -9,6 +9,7 @@ import ProductReducer from '../product/productReducer';
 import ClientReducer from '../client/clientReducer';
 import SelectReducer from '../common/widget/select/selectReducer';
 import LoginReducer from '../login/loginReducer';
+import AuthReducer from '../auth/authReducer';
 
 const rootReducer = combineReducers({
   dashboard: DashboardReducer,
@@ -19,7 +20,8 @@ const rootReducer = combineReducers({
   form: formReducer,
   toastr: toastrReducer,
   select: SelectReducer,
-  login: LoginReducer
+  login: LoginReducer,
+  auth: AuthReducer
 });
 
 export default rootReducer;

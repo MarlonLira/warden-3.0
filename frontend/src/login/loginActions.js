@@ -12,7 +12,7 @@ const INITIAL_VALUES = {};
 export function AccountValidation(values) {
   console.log('tentando logar...')
   console.log(values)
-  return submit2(values, 'get');
+  return submit(values, 'get');
 }
 
 function submit2(values, method) {
@@ -21,6 +21,7 @@ function submit2(values, method) {
 }
 
 function submit(values, method) {
+  window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`);
   return new Promise((resolve, reject) => {
     const id = (method == 'delete' || method == 'get') ? ReturnIfValid(values.id, 0) : '';
     axios[method](`${BASE_URL}/user/${id}`, values)

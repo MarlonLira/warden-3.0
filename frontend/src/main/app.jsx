@@ -13,7 +13,7 @@ import Login from '../login/login';
 
 import If from '../common/operator/if';
 
-const isUser = false;
+const isUser = true;
 export default props => (
   <div className='wrapper'>
     <If test={isUser == true}>

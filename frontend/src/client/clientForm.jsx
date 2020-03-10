@@ -5,7 +5,6 @@ import { reduxForm, Field } from 'redux-form';
 
 import { init } from './clientActions';
 import labelAndInput from '../common/form/labelAndInput';
-import Select from '../common/widget/select/select';
 
 class ClientForm extends Component {
     render() {

@@ -23,7 +23,12 @@
   },
   "homepage": "https://github.com/MarlonLira/warden-3.0#readme",
   "dependencies": {
-    "bcrypt": "3.0.6",
+    "bcrypt": "^3.0.6",
+    "body-parser": "^1.15.2",
+    "express-query-int": "^1.0.1",
+    "lodash": "^4.17.4",
+    "node-restful": "^0.2.5",
+    "pm2": "^2.1.5",
     "body-parse": "^0.1.0",
     "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",

@@ -28,13 +28,13 @@ class LoginForm extends Component {
               <input type="checkbox" id="remember" />
               <label htmlFor="remember">
                 Lembrar-Me
-                      </label>
+              </label>
             </div>
           </div>
           <div className="col-4">
             <button type='submit' className='btn btn-block btn-primary '>
               Entrar
-                  </button>
+            </button>
           </div>
         </div>
         <p className="mb-1">
