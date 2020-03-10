@@ -12,7 +12,6 @@ import Messages from '../common/msg/messages';
 import Login from '../login/login';
 
 import If from '../common/operator/if';
-import { AccountValidation } from '../login/loginActions';
 
 const isUser = false;
 export default props => (
@@ -26,7 +25,7 @@ export default props => (
           </NavbarItems>
           <NavbarSearch />
         </Navbar>
-        <SideBar onSubmit={AccountValidation} />
+        <SideBar />
         <div className='content-wrapper'>
           <Routes />
         </div>
