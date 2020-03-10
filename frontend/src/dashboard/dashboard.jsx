@@ -29,7 +29,7 @@ class Dashboard extends Component {
             <ValueBox
               cols='6 4'
               color='green'
-              icon='bank'
+              icon='dollar-sign'
               value={`R$ ${credit}`}
               text='Total de Créditos'
             />
@@ -43,7 +43,7 @@ class Dashboard extends Component {
             <ValueBox
               cols='6 4'
               color='blue'
-              icon='money'
+              icon='donate'
               value={`R$ ${consolidated}`}
               text='Valor Consolidado'
             />
@@ -53,7 +53,7 @@ class Dashboard extends Component {
               <InfoBox
                 cols='6 4'
                 color='green'
-                icon='flag-o'
+                icon='euro-sign'
                 value={`R$ ${goal}`}
                 text='Meta'
                 percentValue={`${pGoal}%`}

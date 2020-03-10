@@ -1,7 +1,7 @@
 import { Sequelize } from 'sequelize';
 import * as Config from '../config.json';
 
-var _dbConfig = Config.Database.MySql;
+var _dbConfig = Config.Database.MSSQL;
 
 class DbContext {
 
@@ -24,7 +24,7 @@ class DbContext {
       {
         port: this.port,
         host: this.host,
-        dialect: 'mysql'
+        dialect: 'mssql'
         // dialectOptions: {
         //   ssl: true
         // }

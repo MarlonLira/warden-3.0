@@ -4,6 +4,7 @@ import EmployeeController from '../controllers/EmployeeController';
 import BillingCycleController from '../controllers/BillingCycleController';
 import ProductController from '../controllers/ProductController';
 import DashboardController from '../controllers/DashboardController';
+import UserController from '../controllers/UserController';
 
 module.exports = function (server) {
   Route.Register(server, ClientController);
@@ -11,4 +12,5 @@ module.exports = function (server) {
   Route.Register(server, BillingCycleController);
   Route.Register(server, ProductController);
   Route.Register(server, DashboardController);
+  Route.Register(server, UserController);
 }

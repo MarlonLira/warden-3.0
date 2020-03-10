@@ -18,6 +18,7 @@ export default props => (
       </MenuTree>
       <MenuTree label='Componentes' icon='archive' path='#'>
         <MenuItem label='Acessar' icon='angle-right' path='#components' />
+        <MenuItem label='Login' icon='expeditedssl' path='#login' />
       </MenuTree>
       
     </ul>

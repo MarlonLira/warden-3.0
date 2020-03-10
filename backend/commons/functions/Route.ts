@@ -11,6 +11,7 @@ class Route {
     });
     router.get(`/${path}/:id`, (req, res) => {
       req.body.id = req.params.id;
+      console.log(req.body);
       new controller(req.body).Search(res).then(x => console.log());
     });
     router.get(`/${path}s`, (req, res) => {
