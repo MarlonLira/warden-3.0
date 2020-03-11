@@ -2,13 +2,13 @@ import { toastr } from 'react-redux-toastr';
 import axios from 'axios';
 import consts from '../consts';
 
-export function login(values) {
-  return submit(values, `${consts.OAPI_URL}/login`)
-}
+// export function login(values) {
+//   return submit(values, `${consts.OAPI_URL}/login`)
+// }
 
-export function signup(values) {
-  return submit(values, `${consts.OAPI_URL}/signup`)
-}
+// export function signup(values) {
+//   return submit(values, `${consts.OAPI_URL}/signup`)
+// }
 
 function submit(values, url) {
   return dispatch => {
@@ -25,21 +25,37 @@ function submit(values, url) {
   }
 }
 
-export function logout() {
-  return { type: 'TOKEN_VALIDATED', payload: false }
-}
+export const login = values => submit(values, `${consts.OAPI_URL}/login`);
+export const signup = values => submit(values, `${consts.OAPI_URL}/signup`);
+export const logout = () => ({ type: 'TOKEN_VALIDATED', payload: false });
 
-export function validateToken(token) {
-  return dispatch => {
-    if (token) {
-      axios.post(`${consts.OAPI_URL}/validateToken`, { token })
-        .then(resp => {
-          dispatch({ type: 'TOKEN_VALIDATED', payload: resp.data.valid })
-        })
-        .catch(e => dispatch({ type: 'TOKEN_VALIDATED', payload: false }))
+// export function logout() {
+//   return { type: 'TOKEN_VALIDATED', payload: false }
+// }
 
-    } else {
-      dispatch({ type: 'TOKEN_VALIDATED', payload: false })
-    }
-  }
-}
+// export function validateToken(token) {
+//   return dispatch => {
+//     if (token) {
+//       axios.post(`${consts.OAPI_URL}/validateToken`, { token })
+//         .then(resp => {
+//           dispatch({ type: 'TOKEN_VALIDATED', payload: resp.data.valid })
+//         })
+//         .catch(e => dispatch({ type: 'TOKEN_VALIDATED', payload: false }))
+
+//     } else {
+//       dispatch({ type: 'TOKEN_VALIDATED', payload: false })
+//     }
+//   }
+// }
+
+export const validateToken = token => dispatch => {
+  if (token) {
+    axios.post(`${consts.OAPI_URL}/validateToken`, { token })
+      .then(resp => {
+        dispatch({ type: 'TOKEN_VALIDATED', payload: resp.data.valid });
+      })
+      .catch(e => dispatch({ type: 'TOKEN_VALIDATED', payload }));
+  } else {
+    dispatch({ type: 'TOKEN_VALIDATED', payload });
+  };
+};

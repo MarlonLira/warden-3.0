@@ -1,4 +1,5 @@
 import * as express from 'express';
+import IAuthSecurity from '../../interfaces/IAuthSecurity';
 
 class Route {
   static Register(server, controller: any) {
@@ -28,4 +29,28 @@ class Route {
   }
 }
 
-export { Route };
+class RouteAuth {
+  static Register(server, controller: any) {
+    const router = express.Router();
+    server.use('/', router);
+
+    let path = controller.name.replace('Controller', '');
+    router.post(`/${path}/tokenValidate`, (req, res) => {
+      new controller(req.body).TokenValidate(res).then(x => console.log());
+    });
+
+    router.post(`/${path}/tokenGeneration`, (req, res) => {
+      new controller(req.body).tokenGeneration(res).then(x => console.log());
+    });
+
+    router.post(`/${path}/signIn`, (req, res) => {
+      new controller(req.body).signIn(res).then(x => console.log());
+    });
+
+    router.post(`/${path}/signOut`, (req, res) => {
+      new controller(req.body).signOut(res).then(x => console.log());
+    });
+  }
+}
+
+export { Route, RouteAuth };

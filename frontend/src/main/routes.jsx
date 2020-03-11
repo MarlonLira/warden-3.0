@@ -7,6 +7,7 @@ import Product from '../product/product';
 import Client from '../client/client';
 import Components from '../component/components';
 import Login from '../login/login';
+import AuthOrApp from '../auth/authOrApp';
 
 export default props => (
   <Router history={hashHistory}>
@@ -19,3 +20,17 @@ export default props => (
     <Redirect from='*' to='/' />
   </Router>
 );
+
+// export default props => (
+//   <Router history={hashHistory}>
+//     <Route path='/' component={AuthOrApp} >
+//       <IndexRoute component={Dashboard} />
+//       <Route path='/billingCycles' component={BillingCycle} />
+//       <Route path='/products' component={Product} />
+//       <Route path='/clients' component={Client} />
+//       <Route path='/components' component={Components} />
+//       <Route path='/login' component={Login} />
+//     </Route>
+//     <Redirect from='*' to='/' />
+//   </Router>
+// );
