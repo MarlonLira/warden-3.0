@@ -3,11 +3,38 @@ import { User } from '../models/User';
 import { Op } from 'sequelize';
 import { HttpCode } from '../commons/enums/Http';
 import { GetHttpMessage } from '../commons/functions/Http';
-import { Attributes, Querying } from '../commons/Helpers'
+import { Attributes, Querying, Crypto } from '../commons/Helpers';
 
 export default class UserController extends User implements IEntitie {
   Save(response?: any) {
-    throw new Error("Method not implemented.");
+    return new Promise((resolve, reject) => {
+      let query: any;
+      query = Querying.ReturnLikeQuery(this, ['registryCode',])
+      query.status = 1;
+      User.findOne({ where: query })
+        .then(result => {
+          console.log(result);
+          if (!Attributes.IsValid(result)) {
+            User.create({
+              name: this.name,
+              registryCode: this.registryCode,
+              phone: this.phone,
+              email: this.email,
+              status: 1,
+              password: Crypto.Encrypt(this.password)
+            }).then(result => {
+              resolve(response.status(HttpCode.Ok).send(GetHttpMessage(HttpCode.Ok, User)));
+            }).catch(error => {
+              resolve(response.status(HttpCode.Bad_Request).send(GetHttpMessage(HttpCode.Bad_Request, User, error)));
+            })
+          } else {
+            resolve(response.status(HttpCode.Bad_Request).send(GetHttpMessage(HttpCode.Bad_Request, User, "Já existe um cadastro para o usuario!")));
+          }
+        })
+        .catch(error => {
+          reject(error.message);
+        })
+    })
   }
   Search(response?: any, isAll?: boolean) {
     console.log(this);
@@ -17,7 +44,7 @@ export default class UserController extends User implements IEntitie {
         if (this.id > 0) {
           query = Querying.ReturnEqualQuery(this, ['id']);
         }
-        else  {
+        else {
           query = Querying.ReturnLikeQuery(this, ['name', 'registryCode', 'password', 'email']);
         }
       }

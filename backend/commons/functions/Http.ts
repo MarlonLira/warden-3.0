@@ -1,7 +1,7 @@
 import { HttpCode } from '../enums/Http';
 
 //http://weblink.com.br/blog/o-que-e-http-codigos-erros-http
-function GetHttpMessage(value: HttpCode, entitie = null, result = null) {
+function GetHttpMessage(value: HttpCode, entitie = null, _result = null) {
   var result;
   switch (value) {
     case HttpCode.Continue: {
@@ -15,40 +15,45 @@ function GetHttpMessage(value: HttpCode, entitie = null, result = null) {
     case HttpCode.Ok: {
       result = {
         code: 200,
-        message: `${entitie.name} Ok`,
-        result: result
+        message: `${entitie.name} -  Ok`,
+        result: _result
       };
       break;
     }
     case HttpCode.Created: {
       result = {
         code: 201,
-        message: `${entitie.name} Criado/Gerado`,
-        result: result
+        message: `${entitie.name} - Criado/Gerado`,
+        result: _result
       };
       break;
     }
     case HttpCode.Accepted: {
-      result = `${entitie.name} Aceito`;
+      result = `${entitie.name} - Aceito`;
       break;
     }
     case HttpCode.Found: {
       result = {
         code: 302,
-        message: `${entitie.name} Encontrato`,
-        result: result
+        message: `${entitie.name} - Encontrato`,
+        result: _result
       };
       break;
     }
     case HttpCode.Bad_Request: {
       result = {
         code: 400,
-        message: `${entitie.name} Solicitação Inválida`,
-        result: result
+        message: `${entitie.name} - Solicitação Inválida`,
+        result: _result
       };
       break;
     }
     case HttpCode.Unauthorized: {
+      result = {
+        code: 401,
+        message: `${entitie.name} - Unauthorized`,
+        result: _result
+      }
       break;
     }
     case HttpCode.Forbidden: {
@@ -57,8 +62,8 @@ function GetHttpMessage(value: HttpCode, entitie = null, result = null) {
     case HttpCode.Not_Found: {
       result = {
         code: 404,
-        message: `${entitie.name} Not Found`,
-        result: result
+        message: `${entitie.name} - Not Found`,
+        result: _result
       };
       break;
     }
@@ -68,8 +73,8 @@ function GetHttpMessage(value: HttpCode, entitie = null, result = null) {
     case HttpCode.Internal_Server_Error: {
       result = {
         code: 500,
-        message: `${entitie.name} Internal Server Error`,
-        result: result
+        message: `${entitie.name} - Internal Server Error`,
+        result: _result
       };
       break;
     }
@@ -85,8 +90,8 @@ function GetHttpMessage(value: HttpCode, entitie = null, result = null) {
     default: {
       result = {
         code: 500,
-        message: `${entitie.name} Internal Server Error`,
-        result: result
+        message: `${entitie.name} - Internal Server Error`,
+        result: _result
       };
     }
   }

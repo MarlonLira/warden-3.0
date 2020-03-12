@@ -1,4 +1,5 @@
 import { Op } from 'sequelize';
+var bcrypt = require('bcrypt');
 
 class Helpers {
 
@@ -61,4 +62,16 @@ class InnerJson {
   }
 }
 
-export { Helpers, Attributes, InnerJson, Querying }
+class Crypto {
+  static Encrypt(password: string) {
+    var salt = bcrypt.genSaltSync(10);
+    var hash = bcrypt.hashSync(password, salt);
+    return hash;
+  }
+
+  static Compare(password: string, hash: string) {
+    return bcrypt.compareSync(password, hash);
+  }
+}
+
+export { Helpers, Attributes, InnerJson, Querying, Crypto }

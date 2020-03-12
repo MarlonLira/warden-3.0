@@ -52,7 +52,7 @@ User.init({
     type: new DataTypes.STRING(50)
   },
   password:{
-    type: new DataTypes.STRING(20)
+    type: new DataTypes.STRING(100)
   }
 }, {
   sequelize: _instance,
