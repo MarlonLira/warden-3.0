@@ -18,25 +18,20 @@ import If from '../common/operator/if';
 const isUser = false;
 export default props => (
   <div className='wrapper'>
-    <If test={isUser == true}>
-      <div>
-        <Navbar>
-          <NavbarItems>
-            <NavbarItem label="Inicio" source="#" />
-            <NavbarItem label="Contato" source="#contato" />
-          </NavbarItems>
-          <NavbarSearch />
-        </Navbar>
-        <SideBar />
-        <div className='content-wrapper'>
-          <Routes />
-        </div>
-        <Footer />
+    <div>
+      <Navbar>
+        <NavbarItems>
+          <NavbarItem label="Inicio" source="#" />
+          <NavbarItem label="Contato" source="#contato" />
+        </NavbarItems>
+        <NavbarSearch />
+      </Navbar>
+      <SideBar />
+      <div className='content-wrapper'>
+        {props.children}
       </div>
-    </If>
-    <If test={isUser == false}>
-      <Auth />
-    </If>
+      <Footer />
+    </div>
     <Messages />
   </div >
 );

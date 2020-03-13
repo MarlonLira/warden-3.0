@@ -12,32 +12,22 @@ class AuthOrApp extends Component {
   componentWillMount() {
     if (this.props.auth.user) {
       this.props.validateToken(this.props.auth.user.token);
-    }
-    console.log(this.props.auth.user);
+    } 
+
   }
 
   render() {
-
-    return <Auth />;
-    // const { user, validToken } = this.props.auth;
-
-    // if (User && validToken) {
-    //   return <App />;
-    // } else if (!user && !validToken) {
-    //   return <Auth />;
-    // }
-
-    // const { user, validToken } = this.props.auth;
-    // if (User && validToken) {
-    //   console.log('if')
-    //   axios.defaults.headers.common['authorization'] = user.token;
-    //   return <App>{this.props.children}</App>;
-    // } else if (!user && !validToken) {
-    //   console.log('else');
-    //   return <Auth />;
-    // } else {
-    //   return false;
-    // }
+    const { user, validToken } = this.props.auth;
+    if (user && validToken) {
+      console.log('if')
+      axios.defaults.headers.common['authorization'] = user.token;
+      return <App>{this.props.children}</App>;
+    } else if (!user && !validToken) {
+      console.log('else');
+      return <Auth />;
+    } else {
+      return false;
+    }
 
   }
 }
