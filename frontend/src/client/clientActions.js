@@ -39,7 +39,7 @@ function submit(values, method) {
     const id = (method == 'delete' || method == 'get') ? ReturnIfValid(values.id, '') : '';
     axios[method](`${BASE_URL}/client/${id}`, values)
       .then(request => {
-        toastr.success('Sucesso', 'Operação realizada com sucesso.');
+        toastr.success('Sucesso', 'Operacao realizada com sucesso.');
         resolve(init());
       })
       .catch(error => {

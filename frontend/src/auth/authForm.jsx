@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { login, signup } from './authActions';
+import { signin, signup } from './authActions';
 
 import labelAndInput from '../common/form/labelAndInput';
 
@@ -18,8 +18,14 @@ class AuthForm extends Component {
   };
 
   onSubmit(values) {
-    const { login, signup } = this.props;
-    this.state.loginMode ? login(values) : signup(values);
+    let _values = {
+      "token": "null", 
+      "validated": "false",
+      "user": values
+    };
+    
+    const { signin, signup } = this.props;
+    this.state.loginMode ? signin(_values) : signup(values);
   };
 
   render() {
@@ -76,5 +82,5 @@ class AuthForm extends Component {
 }
 
 AuthForm = reduxForm({ form: 'authForm' })(AuthForm);
-const mapDispatchToProps = dispatch => bindActionCreators({ login, signup }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ signin, signup }, dispatch);
 export default connect(null, mapDispatchToProps)(AuthForm);

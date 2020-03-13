@@ -18,23 +18,24 @@ class AuthController extends Auth implements IAuthSecurity {
 
   SignIn(response?: any) {
     return new Promise((resolve, reject) => {
-      let query: any;
-      // query.status = 1;
-      // if (Attributes.IsValid(this.user.registryCode)) {
-      //   query.registryCode = this.user.registryCode;
-      // } else {
-      //   query.email = this.user.email;
-      // }
-      // console.log(query);
-
+      let query: any = {};
+      query.status = 1;
+      if (Attributes.IsValid(this.user.registryCode)) {
+        query.registryCode = {
+          [Op.eq]: this.user.registryCode
+        };
+      } else {
+        query.email = {
+          [Op.eq]: this.user.email
+        };
+      }
+      console.log(query);
       UserController.findOne({
-        where: {
-          registryCode: this.user.registryCode
-        }
+        where: query
       }).then(result => {
+        console.log(result);
         if (Attributes.IsValid(result)) {
           let _result = Crypto.Compare(this.user.password, result.password);
-          console.log(_result)
           if (_result) {
             resolve(result);
             response.status(HttpCode.Ok).send(GetHttpMessage(HttpCode.Ok, Auth, result));
