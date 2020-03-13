@@ -5,6 +5,8 @@ const INITIAL_STATE = {
 }
 
 export default (state = INITIAL_STATE, action) => {
+  console.log('reducer');
+  console.log(action.payload);
   switch (action.type) {
     case 'TOKEN_VALIDATED': {
       if (action.payload) {

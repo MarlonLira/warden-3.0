@@ -26,19 +26,17 @@ export const signin = values => submit(values, `${consts.OAPI_URL}/signin`);
 export const signup = values => submit(values, `${consts.OAPI_URL}/signup`);
 export const logout = () => ({ type: 'TOKEN_VALIDATED', payload: false });
 
-export const validateToken = token => dispatch => {
-
-  return {
-    type: 'TOKEN_VALIDATED',
-    payload : true
+export const validateToken = token => {
+  console.log(token);
+  if (token) {
+    return new Promise((resolve, reject) => {
+      axios.post(`${consts.OAPI_URL}/tokenValidate`, { token })
+        .then(resp => {
+          dispatch({ type: 'TOKEN_VALIDATED', payload: resp.data.valid });
+        })
+        .catch(e => dispatch({ type: 'TOKEN_VALIDATED', payload }));
+    })
+  } else {
+    dispatch({ type: 'TOKEN_VALIDATED', payload });
   }
-  // if (token) {
-  //   axios.post(`${consts.OAPI_URL}/tokenValidate`, { token })
-  //     .then(resp => {
-  //       dispatch({ type: 'TOKEN_VALIDATED', payload: resp.data.valid });
-  //     })
-  //     .catch(e => dispatch({ type: 'TOKEN_VALIDATED', payload }));
-  // } else {
-  //   dispatch({ type: 'TOKEN_VALIDATED', payload });
-  // };
 };

@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 
 import App from '../main/app';
 import Auth from './auth';
-import { validateToken } from './authActions';
+import { validateToken, logout } from './authActions';
 
 class AuthOrApp extends Component {
   componentWillMount() {
@@ -21,11 +21,11 @@ class AuthOrApp extends Component {
     const { user, validToken } = this.props.auth;
     console.log(user)
     console.log(validToken)
-    if (user) {
+    if (user && validToken) {
       console.log('if')
       axios.defaults.headers.common['authorization'] = user.token;
       return <App>{this.props.children}</App>;
-    } else if (!user && !validToken) {
+    } else if (!user || !validToken) {
       console.log('else');
       return <Auth />;
     } else {
@@ -36,5 +36,5 @@ class AuthOrApp extends Component {
 }
 
 const mapStateToProps = state => ({ auth: state.auth });
-const mapDispatchToProps = dispatch => bindActionCreators({ validateToken }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ validateToken, logout }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(AuthOrApp);
