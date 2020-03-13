@@ -50,7 +50,6 @@ function submit(values, method) {
 }
 
 export function showUpdate(billingCycle) {
-  console.log(billingCycle)
   return new Promise((resolve, reject) => {
     resolve([
       showTabs('tabUpdate'),

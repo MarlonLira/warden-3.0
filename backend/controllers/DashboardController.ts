@@ -33,14 +33,12 @@ class DashboardController extends Dashboard implements IEntitie {
     return new Promise((resolve, reject) => {
       BillingCycle.findAll(query)
         .then(result => {
-          console.log(result);
           this.credit = Attributes.ReturnIfValid(result[0].credit, 0);
           this.debit = Attributes.ReturnIfValid(result[0].debit, 0);
           this.goal = Attributes.ReturnIfValid(500, 0);
           resolve(response.status(HttpCode.Ok).send(this));
         })
         .catch(error => {
-          console.log(error);
           resolve(response.status(HttpCode.Internal_Server_Error).send(GetHttpMessage(HttpCode.Internal_Server_Error, Dashboard, error)))
         })
     })

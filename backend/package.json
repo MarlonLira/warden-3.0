@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/MarlonLira/warden-3.0#readme",
   "dependencies": {
+    "@types/dotenv-safe": "^8.1.0",
     "bcrypt": "^3.0.6",
     "body-parse": "^0.1.0",
     "body-parser": "^1.15.2",
@@ -47,6 +48,7 @@
     "@types/body-parser": "^1.17.1",
     "@types/cookie-parser": "^1.4.2",
     "@types/cors": "^2.8.6",
+    "@types/dotenv": "^8.2.0",
     "@types/es6-promise": "^3.3.0",
     "@types/express": "^4.17.2",
     "@types/express-validator": "^3.0.0",

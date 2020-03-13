@@ -3,7 +3,6 @@ import axios from 'axios';
 import consts from '../consts';
 
 function submit(values, url) {
-  console.log(values);
   return new Promise((resolve, reject) => {
     axios.post(url, values)
       .then(resp => {
@@ -16,7 +15,6 @@ function submit(values, url) {
         ])
       })
       .catch(e => {
-        console.log(e);
         toastr.error('error', e);
       })
   })
@@ -27,16 +25,32 @@ export const signup = values => submit(values, `${consts.OAPI_URL}/signup`);
 export const logout = () => ({ type: 'TOKEN_VALIDATED', payload: false });
 
 export const validateToken = token => {
-  console.log(token);
-  if (token) {
-    return new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
+    if (token) {
       axios.post(`${consts.OAPI_URL}/tokenValidate`, { token })
         .then(resp => {
-          dispatch({ type: 'TOKEN_VALIDATED', payload: resp.data.valid });
+          resolve([
+            {
+              type: 'TOKEN_VALIDATED',
+              payload: resp.data.valid
+            }
+          ]);
         })
-        .catch(e => dispatch({ type: 'TOKEN_VALIDATED', payload }));
-    })
-  } else {
-    dispatch({ type: 'TOKEN_VALIDATED', payload });
-  }
+        .catch(e => {
+          resolve([
+            {
+              type: 'TOKEN_VALIDATED',
+              payload
+            }
+          ])
+        })
+    } else {
+      resolve([
+        {
+          type: 'TOKEN_VALIDATED',
+          payload
+        }
+      ]);
+    }
+  })
 };

@@ -6,7 +6,6 @@ import { GetHttpMessage } from '../commons/functions/Http';
 import { Attributes, Querying, Crypto } from '../commons/Helpers';
 import UserController from '../controllers/UserController';
 
-// const env = require('../env');
 const jwt = require('jsonwebtoken');
 
 class AuthController extends Auth implements IAuthSecurity {
@@ -14,7 +13,6 @@ class AuthController extends Auth implements IAuthSecurity {
   TokenValidate(response?: any) {
     return new Promise((resolve, reject) => {
       let token = this.token || '';
-      console.log(token);
       resolve(
         jwt.verify(token, process.env.SECRET, (err, decoded) =>
           response.status(200).send({ valid: !err }))
@@ -42,34 +40,22 @@ class AuthController extends Auth implements IAuthSecurity {
       UserController.findOne({
         where: query
       }).then(result => {
-        console.log('Achou');
-        console.log(result);
         if (Attributes.IsValid(result) && Crypto.Compare(this.user.password, result.password)) {
-          console.log('Validou');
+          
           let id = result.id;
           let name = result.name;
-          let _result = {};
-          try {
-            //Geração do Token de acesso
-            const token = jwt.sign({ id, name }, process.env.SECRET, {
-              expiresIn: "1h"
-            });
+          
+          //Geração do Token de acesso
+          const token = jwt.sign({ id, name }, process.env.SECRET, {
+            expiresIn: "1h"
+          });
 
-            console.log(token);
-            console.log('Gerou o Token');
-            //objeto Json
-
-            _result = {
-              "token": token,
-              "name": result.name,
-              "email": result.email,
-            }
-          } catch (e) {
-            console.log(e);
+          //objeto Json
+          let _result = {
+            "token": token,
+            "name": result.name,
+            "email": result.email,
           }
-          console.log('Gerou o JSON');
-          console.log(_result);
-
 
           resolve(_result);
           response.status(HttpCode.Ok).send(GetHttpMessage(HttpCode.Ok, Auth, _result));

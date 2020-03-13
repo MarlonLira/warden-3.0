@@ -13,7 +13,6 @@ export default class UserController extends User implements IEntitie {
       query.status = 1;
       User.findOne({ where: query })
         .then(result => {
-          console.log(result);
           if (!Attributes.IsValid(result)) {
             User.create({
               name: this.name,
@@ -37,7 +36,6 @@ export default class UserController extends User implements IEntitie {
     })
   }
   Search(response?: any, isAll?: boolean) {
-    console.log(this);
     return new Promise((resolve, reject) => {
       let query: any;
       if (!isAll) {
