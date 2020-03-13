@@ -6,10 +6,16 @@ import { GetHttpMessage } from '../commons/functions/Http';
 import { Attributes, Querying, Crypto } from '../commons/Helpers';
 import UserController from '../controllers/UserController';
 
+const env = require('../env');
+const jwt = require('jsonwebtoken');
+
 class AuthController extends Auth implements IAuthSecurity {
 
   TokenValidate(response?: any) {
-    throw new Error("Method not implemented.");
+    const token = this.token || '';
+
+    jwt.verify(token, env.authSecret, (err, decoded) => 
+    response.status(200).send({valid: !err}));
   }
 
   TokenGeneration(response?: any) {
@@ -36,6 +42,7 @@ class AuthController extends Auth implements IAuthSecurity {
         console.log(result);
         if (Attributes.IsValid(result)) {
           let _result = Crypto.Compare(this.user.password, result.password);
+          console.log(_result);
           if (_result) {
             resolve(result);
             response.status(HttpCode.Ok).send(GetHttpMessage(HttpCode.Ok, Auth, result));

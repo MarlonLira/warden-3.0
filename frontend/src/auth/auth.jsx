@@ -26,6 +26,7 @@ class Auth extends Component {
             </div>
           </div>
         </div>
+        <Messages />
       </div>
     );
   }

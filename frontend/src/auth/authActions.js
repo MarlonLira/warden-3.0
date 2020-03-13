@@ -7,10 +7,12 @@ function submit(values, url) {
   return new Promise((resolve, reject) => {
     axios.post(url, values)
       .then(resp => {
-        console.log(resp);
-        toastr.message(resp)
+        toastr.message(resp.data.message);
         resolve([
-          { type: 'USER_FETCHED', payload: resp }
+          {
+            type: 'USER_FETCHED',
+            payload: resp.data.result
+          }
         ])
       })
       .catch(e => {
@@ -25,13 +27,18 @@ export const signup = values => submit(values, `${consts.OAPI_URL}/signup`);
 export const logout = () => ({ type: 'TOKEN_VALIDATED', payload: false });
 
 export const validateToken = token => dispatch => {
-  if (token) {
-    axios.post(`${consts.OAPI_URL}/validateToken`, { token })
-      .then(resp => {
-        dispatch({ type: 'TOKEN_VALIDATED', payload: resp.data.valid });
-      })
-      .catch(e => dispatch({ type: 'TOKEN_VALIDATED', payload }));
-  } else {
-    dispatch({ type: 'TOKEN_VALIDATED', payload });
-  };
+
+  return {
+    type: 'TOKEN_VALIDATED',
+    payload : true
+  }
+  // if (token) {
+  //   axios.post(`${consts.OAPI_URL}/tokenValidate`, { token })
+  //     .then(resp => {
+  //       dispatch({ type: 'TOKEN_VALIDATED', payload: resp.data.valid });
+  //     })
+  //     .catch(e => dispatch({ type: 'TOKEN_VALIDATED', payload }));
+  // } else {
+  //   dispatch({ type: 'TOKEN_VALIDATED', payload });
+  // };
 };
