@@ -1,3 +1,6 @@
+
+require('dotenv-safe').config({path: __dirname + '/.env'});
+const jwt = require('jsonwebtoken');
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 

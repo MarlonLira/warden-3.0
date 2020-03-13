@@ -6,16 +6,20 @@ import { GetHttpMessage } from '../commons/functions/Http';
 import { Attributes, Querying, Crypto } from '../commons/Helpers';
 import UserController from '../controllers/UserController';
 
-const env = require('../env');
+// const env = require('../env');
 const jwt = require('jsonwebtoken');
 
 class AuthController extends Auth implements IAuthSecurity {
 
   TokenValidate(response?: any) {
-    const token = this.token || '';
-
-    jwt.verify(token, env.authSecret, (err, decoded) => 
-    response.status(200).send({valid: !err}));
+    return new Promise((resolve, reject) => {
+      let token = this.token || '';
+      console.log(token);
+      resolve(
+        jwt.verify(token, process.env.SECRET, (err, decoded) =>
+          response.status(200).send({ valid: !err }))
+      );
+    })
   }
 
   TokenGeneration(response?: any) {
@@ -35,22 +39,40 @@ class AuthController extends Auth implements IAuthSecurity {
           [Op.eq]: this.user.email
         };
       }
-      console.log(query);
       UserController.findOne({
         where: query
       }).then(result => {
+        console.log('Achou');
         console.log(result);
-        if (Attributes.IsValid(result)) {
-          let _result = Crypto.Compare(this.user.password, result.password);
+        if (Attributes.IsValid(result) && Crypto.Compare(this.user.password, result.password)) {
+          console.log('Validou');
+          let id = result.id;
+          let name = result.name;
+          let _result = {};
+          try {
+            //Geração do Token de acesso
+            const token = jwt.sign({ id, name }, process.env.SECRET, {
+              expiresIn: "1h"
+            });
+
+            console.log(token);
+            console.log('Gerou o Token');
+            //objeto Json
+
+            _result = {
+              "token": token,
+              "name": result.name,
+              "email": result.email,
+            }
+          } catch (e) {
+            console.log(e);
+          }
+          console.log('Gerou o JSON');
           console.log(_result);
-          if (_result) {
-            resolve(result);
-            response.status(HttpCode.Ok).send(GetHttpMessage(HttpCode.Ok, Auth, result));
-          }
-          else {
-            resolve(false)
-            response.status(HttpCode.Unauthorized).send(GetHttpMessage(HttpCode.Unauthorized, Auth, 'Unauthorized'));
-          }
+
+
+          resolve(_result);
+          response.status(HttpCode.Ok).send(GetHttpMessage(HttpCode.Ok, Auth, _result));
         } else {
           resolve(false)
           response.status(HttpCode.Unauthorized).send(GetHttpMessage(HttpCode.Unauthorized, Auth, 'Unauthorized'));
