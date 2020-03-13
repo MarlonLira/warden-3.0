@@ -3,9 +3,11 @@ import axios from 'axios';
 import consts from '../consts';
 
 function submit(values, url) {
+  console.log(values);
   return new Promise((resolve, reject) => {
     axios.post(url, values)
       .then(resp => {
+        console.log(resp);
         toastr.message(resp.data.message);
         resolve([
           {

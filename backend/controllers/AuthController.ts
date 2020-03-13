@@ -41,10 +41,10 @@ class AuthController extends Auth implements IAuthSecurity {
         where: query
       }).then(result => {
         if (Attributes.IsValid(result) && Crypto.Compare(this.user.password, result.password)) {
-          
+
           let id = result.id;
           let name = result.name;
-          
+
           //Geração do Token de acesso
           const token = jwt.sign({ id, name }, process.env.SECRET, {
             expiresIn: "1h"
@@ -70,7 +70,60 @@ class AuthController extends Auth implements IAuthSecurity {
   }
 
   SignUp(response?: any) {
-    throw new Error("Method not implemented.");
+    return new Promise((resolve, reject) => {
+      let query: any = {};
+      query.status = 1;
+      if (Attributes.IsValid(this.user.registryCode)) {
+        query.registryCode = {
+          [Op.eq]: this.user.registryCode
+        };
+      } else {
+        query.email = {
+          [Op.eq]: this.user.email
+        };
+      }
+      console.log(this);
+      UserController.findOne({
+        where: query
+      }).then(result => {
+        if (!Attributes.IsValid(result)) {
+
+          let id = 0;
+          let name = this.user.name;
+
+          //Geração do Token de acesso
+          const token = jwt.sign({ id, name }, process.env.SECRET, {
+            expiresIn: "1h"
+          });
+
+          //objeto Json
+          let _result = {
+            "token": token,
+            "name": this.user.name,
+            "email": this.user.email
+          }
+
+          let _hash = Crypto.Encrypt(this.user.password);
+          UserController.create({
+            name: this.user.name,
+            registryCode: this.user.registryCode,
+            phone: this.user.phone,
+            email: this.user.email,
+            status: 1,
+            password: _hash
+          }).then(result => {
+            resolve(response.status(HttpCode.Ok).send(GetHttpMessage(HttpCode.Ok, Auth, _result)));
+          }).catch(error => {
+            resolve(response.status(HttpCode.Bad_Request).send(GetHttpMessage(HttpCode.Bad_Request, Auth, error)));
+          })
+        } else {
+          response.status(HttpCode.Bad_Request).send(GetHttpMessage(HttpCode.Bad_Request, Auth, 'O usuario já existe no sistema!'));
+          resolve(result);
+        }
+      }).catch(error => {
+        response.status(HttpCode.Forbidden).send(GetHttpMessage(HttpCode.Forbidden, Auth, error.message));
+      })
+    })
   }
 
 }

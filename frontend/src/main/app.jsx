@@ -7,15 +7,8 @@ import NavbarItems from '../common/template/navbar/navItems';
 import NavbarSearch from '../common/template/navbar/navSearch';
 import SideBar from '../common/template/sideBar';
 import Footer from '../common/template/footer';
-import Routes from './routes';
 import Messages from '../common/msg/messages';
 
-import Login from '../login/login';
-import Auth from '../auth/auth';
-
-import If from '../common/operator/if';
-
-const isUser = false;
 export default props => (
   <div className='wrapper'>
     <div>
@@ -35,28 +28,3 @@ export default props => (
     <Messages />
   </div >
 );
-
-// export default props => (
-//   <div className='wrapper'>
-// //     <If test={isUser == true}>
-// //       <div>
-// //         <Navbar>
-// //           <NavbarItems>
-// //             <NavbarItem label="Inicio" source="#" />
-// //             <NavbarItem label="Contato" source="#contato" />
-// //           </NavbarItems>
-// //           <NavbarSearch />
-// //         </Navbar>
-// //         <SideBar />
-// //         <div className='content-wrapper'>
-// //           {props.children}
-// //         </div>
-// //         <Footer />
-// //       </div>
-// //     </If>
-// //     <If test={isUser == false}>
-// //       <Login />
-// //     </If>
-// //     <Messages />
-// //   </div >
-// );

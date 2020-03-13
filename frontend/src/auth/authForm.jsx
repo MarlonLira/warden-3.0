@@ -25,7 +25,7 @@ class AuthForm extends Component {
     };
     
     const { signin, signup } = this.props;
-    this.state.loginMode ? signin(_values) : signup(values);
+    this.state.loginMode ? signin(_values) : signup(_values);
   };
 
   render() {
@@ -39,15 +39,23 @@ class AuthForm extends Component {
             label='Nome' cols='12 12' maxLength='30' hide={loginMode}
             placeholder='Informe seu Nome' type='input'
           />
+          <Field name='registryCode' component={labelAndInput} required='true'
+            label='CPF' cols='12 12' maxLength='30' hide={loginMode}
+            placeholder='Informe seu CPF' type='input'
+          />
           <Field name='email' component={labelAndInput} required='true'
-            label='Login' cols='12 12' maxLength='30'
+            label={loginMode ? 'Login' : 'Email'} cols='12 12' maxLength='30'
             placeholder='Informe seu email ou cpf' type='email'
+          />
+          <Field name='phone' component={labelAndInput} required='true'
+            label='Telefone' cols='12 12' maxLength='30' hide={loginMode}
+            placeholder='Informe seu email ou cpf' type='tel'
           />
           <Field name='password' component={labelAndInput}
             label='Senha' cols='12 12' required='true'
             placeholder='Informe sua senha' type='password'
           />
-          <Field name='confirm_password' component={labelAndInput}
+          <Field name='confirmPassword' component={labelAndInput}
             label='Confirmar Senha' cols='12 12' required='true' hide={loginMode}
             placeholder='Confirme sua senha' type='password'
           />

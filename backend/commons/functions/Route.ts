@@ -43,12 +43,12 @@ class RouteAuth {
       new controller(req.body).TokenGeneration(res).then(x => console.log());
     });
 
-    router.post(`/${path}/signIn`, (req, res) => {
+    router.post(`/${path}/signin`, (req, res) => {
       new controller(req.body).SignIn(res).then(x => console.log());
     });
 
-    router.post(`/${path}/signOut`, (req, res) => {
-      new controller(req.body).SignOut(res).then(x => console.log());
+    router.post(`/${path}/signup`, (req, res) => {
+      new controller(req.body).SignUp(res).then(x => console.log());
     });
   }
 }

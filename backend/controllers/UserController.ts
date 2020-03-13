@@ -1,6 +1,5 @@
 import IEntitie from '../interfaces/IEntitie';
 import { User } from '../models/User';
-import { Op } from 'sequelize';
 import { HttpCode } from '../commons/enums/Http';
 import { GetHttpMessage } from '../commons/functions/Http';
 import { Attributes, Querying, Crypto } from '../commons/Helpers';
@@ -22,12 +21,12 @@ export default class UserController extends User implements IEntitie {
               status: 1,
               password: Crypto.Encrypt(this.password)
             }).then(result => {
-              resolve(response.status(HttpCode.Ok).send(GetHttpMessage(HttpCode.Ok, User)));
+              resolve(response.status(HttpCode.Ok).send(GetHttpMessage(HttpCode.Ok, User, result)));
             }).catch(error => {
               resolve(response.status(HttpCode.Bad_Request).send(GetHttpMessage(HttpCode.Bad_Request, User, error)));
             })
           } else {
-            resolve(response.status(HttpCode.Bad_Request).send(GetHttpMessage(HttpCode.Bad_Request, User, "Já existe um cadastro para o usuario!")));
+            resolve(response.status(HttpCode.Bad_Request).send(GetHttpMessage(HttpCode.Bad_Request, User, "Já existe um cadastro para o usuário!")));
           }
         })
         .catch(error => {
@@ -43,7 +42,7 @@ export default class UserController extends User implements IEntitie {
           query = Querying.ReturnEqualQuery(this, ['id']);
         }
         else {
-          query = Querying.ReturnLikeQuery(this, ['name', 'registryCode', 'password', 'email']);
+          query = Querying.ReturnLikeQuery(this, ['registryCode', 'email']);
         }
       }
 
