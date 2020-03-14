@@ -1,9 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\backend",
-    "\\backend\\context"
+    "\\frontend",
+    "\\frontend\\src",
+    "\\frontend\\src\\main"
   ],
-  "SelectedNode": "\\backend\\context\\DbContext.ts",
   "PreviewInSolutionExplorer": false
 }

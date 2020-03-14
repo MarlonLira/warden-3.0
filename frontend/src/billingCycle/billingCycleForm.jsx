@@ -12,7 +12,7 @@ class BillingCycleForm extends Component {
     const { handleSubmit, readOnly } = this.props;
     return (
       <form role='form' onSubmit={handleSubmit}>
-        <div className='box-body'>
+        <div className='row'>
           <Field name='clientId' component={labelAndInput}
             label='Cliente' cols='12 4' readOnly={readOnly}
             placeholder='Informe o id do Cliente' type='number'

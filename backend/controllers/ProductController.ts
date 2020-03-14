@@ -51,56 +51,56 @@ export default class ProductController extends Product implements IEntitie {
     })
   }
   Update(response?: any) {
-		return new Promise((resolve, reject) => {
-			let attributes: any = {}
+    return new Promise((resolve, reject) => {
+      let attributes: any = {}
 
-			Product.findOne({
-				where: {
-					id: this.id
-				}
-			}).then(result => {
-				attributes.name = Attributes.ReturnIfValid(this.name, result.name);
-				attributes.amount = Attributes.ReturnIfValid(this.amount, result.amount);
-				attributes.code = Attributes.ReturnIfValid(this.code, result.code);
-				attributes.date = Attributes.ReturnIfValid(this.date, result.date);
-				attributes.validity = Attributes.ReturnIfValid(this.validity, result.validity);
-				attributes.obs = Attributes.ReturnIfValid(this.obs, result.obs);
+      Product.findOne({
+        where: {
+          id: this.id
+        }
+      }).then(result => {
+        attributes.name = Attributes.ReturnIfValid(this.name, result.name);
+        attributes.amount = Attributes.ReturnIfValid(this.amount, result.amount);
+        attributes.code = Attributes.ReturnIfValid(this.code, result.code);
+        attributes.date = Attributes.ReturnIfValid(this.date, result.date);
+        attributes.validity = Attributes.ReturnIfValid(this.validity, result.validity);
+        attributes.obs = Attributes.ReturnIfValid(this.obs, result.obs);
 
-				Product.update(attributes, {
-					where: {
-						id: this.id
-					}
-				})
-					.then(result => {
-						response.status(HttpCode.Ok).send(GetHttpMessage(HttpCode.Ok, Product, result));
-						resolve(result);
-					})
-					.catch(error => {
-						resolve(response.status(HttpCode.Internal_Server_Error).send(GetHttpMessage(HttpCode.Internal_Server_Error, Product, error)));
-					})
-			})
-				.catch(error => {
-					resolve(response.status(HttpCode.Not_Found).send(GetHttpMessage(HttpCode.Not_Found, Product, error)));
-				})
-		})
-	}
+        Product.update(attributes, {
+          where: {
+            id: this.id
+          }
+        })
+          .then(result => {
+            response.status(HttpCode.Ok).send(GetHttpMessage(HttpCode.Ok, Product, result));
+            resolve(result);
+          })
+          .catch(error => {
+            resolve(response.status(HttpCode.Internal_Server_Error).send(GetHttpMessage(HttpCode.Internal_Server_Error, Product, error)));
+          })
+      })
+        .catch(error => {
+          resolve(response.status(HttpCode.Not_Found).send(GetHttpMessage(HttpCode.Not_Found, Product, error)));
+        })
+    })
+  }
   Delete(response?: any) {
-		return new Promise((resolve, reject) => {
-			Product.destroy({
-				where: {
-					id: this.id
-				}
-			}).then(result => {
-				if (result == 1) {
-					response.status(HttpCode.Ok).send(GetHttpMessage(HttpCode.Ok, Product, result));
-				} else {
-					resolve(response.status(HttpCode.Not_Found).send(GetHttpMessage(HttpCode.Not_Found, Product, result)));
-				}
-				resolve(result);
-			})
-				.catch(error => {
-					resolve(response.status(HttpCode.Internal_Server_Error).send(GetHttpMessage(HttpCode.Internal_Server_Error, Product, error)));
-				})
-		})
-	}
+    return new Promise((resolve, reject) => {
+      Product.destroy({
+        where: {
+          id: this.id
+        }
+      }).then(result => {
+        if (result == 1) {
+          response.status(HttpCode.Ok).send(GetHttpMessage(HttpCode.Ok, Product, result));
+        } else {
+          resolve(response.status(HttpCode.Not_Found).send(GetHttpMessage(HttpCode.Not_Found, Product, result)));
+        }
+        resolve(result);
+      })
+        .catch(error => {
+          resolve(response.status(HttpCode.Internal_Server_Error).send(GetHttpMessage(HttpCode.Internal_Server_Error, Product, error)));
+        })
+    })
+  }
 }

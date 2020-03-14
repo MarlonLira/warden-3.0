@@ -9,7 +9,7 @@
     },
 
     "MSSQL": {
-      "host": "DESKTOP-O8EQSGP",
+      "host": "DESKTOP-5BLVFSA",
       "password": "Root1526",
       "port": 1433,
       "schema": "warden",

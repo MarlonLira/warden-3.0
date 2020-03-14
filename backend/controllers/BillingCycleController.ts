@@ -18,7 +18,7 @@ export default class BillingCycleController extends BillingCycle implements IEnt
         date: this.date,
         clientId: this.clientId
       }).then(result => {
-        response.status(HttpCode.Ok).send(GetHttpMessage(HttpCode.Ok, BillingCycle, result));
+        response.status(HttpCode.Ok).send(result);
         resolve(result);
       }).catch(error => {
         console.error(error.message);
@@ -48,27 +48,28 @@ export default class BillingCycleController extends BillingCycle implements IEnt
       BillingCycle.findAll(query)
         .then(result => {
           if (result != null && result != undefined) {
-            let StartCount = 0;
-            let EndCount = result.length
-            result.forEach(found => {
-              Client.findOne(
-                {
-                  where: {
-                    id: found.clientId
+            if (isAll) {
+              let StartCount = 0;
+              let EndCount = result.length
+              result.forEach(found => {
+                Client.findOne(
+                  {
+                    where: {
+                      id: found.clientId
+                    }
                   }
-                }
-              ).then(request => {
-                StartCount++;
-                found.setDataValue('client', request);
-                found.setDataValue('innerDate', new InnerDate(found.date));
-                _result.push(found);
+                ).then(request => {
+                  StartCount++;
+                  found.setDataValue('client', request);
+                  found.setDataValue('innerDate', new InnerDate(found.date));
+                  _result.push(found);
 
-                if (StartCount == EndCount) {
-                  response.status(HttpCode.Ok).send(_result);
-                  resolve(_result);
-                }
+                  if (StartCount == EndCount) {
+                    resolve(response.status(HttpCode.Ok).send(_result));
+                  }
+                })
               })
-            })
+            }
           }
           else {
             resolve(response.status(HttpCode.Not_Found).send(GetHttpMessage(HttpCode.Not_Found)));
