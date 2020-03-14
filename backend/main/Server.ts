@@ -1,4 +1,4 @@
-import * as dotenv from "dotenv";
+import * as dotenv from 'dotenv';
 
 const jwt = require('jsonwebtoken');
 import * as express from 'express';

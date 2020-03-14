@@ -13,17 +13,19 @@ class AuthForm extends Component {
     this.state = { loginMode: true };
   }
 
+
+
   changeMode() {
     this.setState({ loginMode: !this.state.loginMode });
   };
 
   onSubmit(values) {
     let _values = {
-      "token": "null", 
+      "token": "null",
       "validated": "false",
       "user": values
     };
-    
+
     const { signin, signup } = this.props;
     this.state.loginMode ? signin(_values) : signup(_values);
   };
