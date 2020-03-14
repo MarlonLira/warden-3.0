@@ -8,7 +8,7 @@ export default props => (
     {/* <!-- Logo --> */}
     <Logo text="My Warden" icon="coins" />
     <section className='sidebar'>
-      <UserPanel name="Teste" />
+      <UserPanel />
       <Menu />
     </section>
   </aside>

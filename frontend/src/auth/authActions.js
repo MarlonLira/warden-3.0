@@ -3,12 +3,11 @@ import axios from 'axios';
 import consts from '../consts';
 
 function submit(values, url) {
-  console.log(values);
   return new Promise((resolve, reject) => {
     axios.post(url, values)
       .then(resp => {
-        console.log(resp);
-        toastr.message(resp.data.message);
+        //toastr.info(resp.data.message);
+        toastr.message('Info', resp.data.message);
         resolve([
           {
             type: 'USER_FETCHED',
@@ -16,8 +15,8 @@ function submit(values, url) {
           }
         ])
       })
-      .catch(e => {
-        toastr.error('error', e);
+      .catch(error => {
+        toastr.error('Error',error.response.data.message);
       })
   })
 }

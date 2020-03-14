@@ -15,7 +15,7 @@ class AuthController extends Auth implements IAuthSecurity {
       let token = this.token || '';
       resolve(
         jwt.verify(token, process.env.SECRET, (err, decoded) =>
-          response.status(200).send({ valid: !err }))
+          response.status(HttpCode.Ok).send({ valid: !err }))
       );
     })
   }
@@ -58,13 +58,13 @@ class AuthController extends Auth implements IAuthSecurity {
           }
 
           resolve(_result);
-          response.status(HttpCode.Ok).send(GetHttpMessage(HttpCode.Ok, Auth, _result));
+          response.status(HttpCode.Ok).send(GetHttpMessage(HttpCode.Ok, Auth, _result, 'Acesso bem sucedido!'));
         } else {
           resolve(false)
-          response.status(HttpCode.Unauthorized).send(GetHttpMessage(HttpCode.Unauthorized, Auth, 'Unauthorized'));
+          response.status(HttpCode.Unauthorized).send(GetHttpMessage(HttpCode.Unauthorized, Auth, 'Unauthorized', 'A conta informada é inválida!'));
         }
       }).catch(error => {
-        resolve(response.status(HttpCode.Internal_Server_Error).send(GetHttpMessage(HttpCode.Internal_Server_Error, Auth, error)));
+        resolve(response.status(HttpCode.Internal_Server_Error).send(GetHttpMessage(HttpCode.Internal_Server_Error, Auth, error, 'Erro desconhecido, por favor reporte a equipe técnica!')));
       })
     })
   }
@@ -88,21 +88,6 @@ class AuthController extends Auth implements IAuthSecurity {
       }).then(result => {
         if (!Attributes.IsValid(result)) {
 
-          let id = 0;
-          let name = this.user.name;
-
-          //Geração do Token de acesso
-          const token = jwt.sign({ id, name }, process.env.SECRET, {
-            expiresIn: "1h"
-          });
-
-          //objeto Json
-          let _result = {
-            "token": token,
-            "name": this.user.name,
-            "email": this.user.email
-          }
-
           let _hash = Crypto.Encrypt(this.user.password);
           UserController.create({
             name: this.user.name,
@@ -111,13 +96,28 @@ class AuthController extends Auth implements IAuthSecurity {
             email: this.user.email,
             status: 1,
             password: _hash
-          }).then(result => {
-            resolve(response.status(HttpCode.Ok).send(GetHttpMessage(HttpCode.Ok, Auth, _result)));
+          }).then(createResult => {
+
+            let id = createResult.id;
+            let name = createResult.name;
+  
+            //Geração do Token de acesso
+            const token = jwt.sign({ id, name }, process.env.SECRET, {
+              expiresIn: "1h"
+            });
+  
+            //objeto Json
+            let _result = {
+              "token": token,
+              "name": createResult.name,
+              "email": createResult.email
+            }
+            resolve(response.status(HttpCode.Ok).send(GetHttpMessage(HttpCode.Ok, Auth, _result, 'Cadastro realizado com sucesso!')));
           }).catch(error => {
-            resolve(response.status(HttpCode.Bad_Request).send(GetHttpMessage(HttpCode.Bad_Request, Auth, error)));
+            resolve(response.status(HttpCode.Bad_Request).send(GetHttpMessage(HttpCode.Bad_Request, Auth, error, 'Erro na tentativa de criação do usuário, tente novamente mais tarde!')));
           })
         } else {
-          response.status(HttpCode.Bad_Request).send(GetHttpMessage(HttpCode.Bad_Request, Auth, 'O usuario já existe no sistema!'));
+          response.status(HttpCode.Bad_Request).send(GetHttpMessage(HttpCode.Bad_Request, Auth, null, 'O usuario já existe no sistema!'));
           resolve(result);
         }
       }).catch(error => {

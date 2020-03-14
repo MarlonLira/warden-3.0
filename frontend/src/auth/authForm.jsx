@@ -13,8 +13,6 @@ class AuthForm extends Component {
     this.state = { loginMode: true };
   }
 
-
-
   changeMode() {
     this.setState({ loginMode: !this.state.loginMode });
   };
@@ -31,7 +29,6 @@ class AuthForm extends Component {
   };
 
   render() {
-
     const { loginMode } = this.state;
     const { handleSubmit } = this.props;
     return (
