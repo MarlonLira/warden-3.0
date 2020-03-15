@@ -23,7 +23,6 @@
   },
   "homepage": "https://github.com/MarlonLira/warden-3.0#readme",
   "dependencies": {
-    "@types/dotenv-safe": "^8.1.0",
     "bcrypt": "^3.0.6",
     "body-parse": "^0.1.0",
     "body-parser": "^1.15.2",
