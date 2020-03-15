@@ -82,7 +82,6 @@ class AuthController extends Auth implements IAuthSecurity {
           [Op.eq]: this.user.email
         };
       }
-      console.log(this);
       UserController.findOne({
         where: query
       }).then(result => {

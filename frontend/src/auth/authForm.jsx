@@ -44,7 +44,7 @@ class AuthForm extends Component {
           />
           <Field name='email' component={labelAndInput} required='true'
             label={loginMode ? 'Login' : 'Email'} cols='12 12' maxLength='30'
-            placeholder='Informe seu email ou cpf' type='email'
+            placeholder='Informe seu email ou cpf' type={loginMode ? 'input' : 'email'}
           />
           <Field name='phone' component={labelAndInput} required='true'
             label='Telefone' cols='12 12' maxLength='30' hide={loginMode}
