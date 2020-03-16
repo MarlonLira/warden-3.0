@@ -17,7 +17,7 @@ class UserPanel extends Component {
                     {/* <i className='fa fa-user img-circle elevation-4' ></i> */}
                     <img src={DefaultLogo} className="img-circle elevation-2"></img>
                 </div>
-                <div className="info">
+                <div id='userName' className="info">
                     <a href="#" className="d-block" >{name}</a>
                 </div>
                 <div>

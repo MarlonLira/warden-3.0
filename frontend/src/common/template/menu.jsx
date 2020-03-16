@@ -6,7 +6,7 @@ import MenuTree from './menuTree';
 export default props => (
   <nav className="mt-2">
     <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-      <MenuTree path='/' label='Dashboard' icon='tachometer-alt' />
+      <MenuItem path='/' label='Dashboard' icon='tachometer-alt' />
       <MenuTree label='Cliente' icon='users' >
         <MenuItem label='Acessar' icon='circle' path='clients' />
       </MenuTree>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Router, Route, Redirect, hashHistory, IndexRoute } from 'react-router';
+
 import Dashboard from '../dashboard/dashboard';
 import BillingCycle from '../billingCycle/billingCycle';
 import Product from '../product/product';

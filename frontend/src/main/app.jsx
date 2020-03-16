@@ -1,4 +1,3 @@
-import '../common/template/dependencies';
 import React from 'react';
 
 import Navbar from '../common/template/navbar/navbar';
@@ -11,20 +10,18 @@ import Messages from '../common/msg/messages';
 
 export default props => (
   <div className='wrapper'>
-    <div>
-      <Navbar>
-        <NavbarItems>
-          <NavbarItem label="Inicio" source="#" />
-          <NavbarItem label="Contato" source="#contato" />
-        </NavbarItems>
-        <NavbarSearch />
-      </Navbar>
-      <SideBar />
-      <div className='content-wrapper'>
-        {props.children}
-      </div>
-      <Footer />
+    <Navbar>
+      <NavbarItems>
+        <NavbarItem label="Inicio" source="" />
+        <NavbarItem label="Contato" source="contato" />
+      </NavbarItems>
+      <NavbarSearch />
+    </Navbar>
+    <SideBar />
+    <div className='content-wrapper'>
+      {props.children}
     </div>
+    <Footer />
     <Messages />
   </div >
 );

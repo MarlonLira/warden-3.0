@@ -7,7 +7,7 @@ function submit(values, url) {
     axios.post(url, values)
       .then(resp => {
         //toastr.info(resp.data.message);
-        toastr.message('Info', resp.data.message);
+        toastr.success('Info', resp.data.message);
         resolve([
           {
             type: 'USER_FETCHED',

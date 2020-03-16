@@ -1,12 +1,13 @@
-import '../common/template/dependencies';
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import '../common/template/dependencies';
+
 import App from '../main/app';
 import Auth from './auth';
-import { validateToken, logout } from './authActions';
+import { validateToken } from './authActions';
 
 class AuthOrApp extends Component {
   componentWillMount() {
@@ -25,10 +26,9 @@ class AuthOrApp extends Component {
     } else {
       return false;
     }
-
   }
 }
 
 const mapStateToProps = state => ({ auth: state.auth });
-const mapDispatchToProps = dispatch => bindActionCreators({ validateToken, logout }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ validateToken }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(AuthOrApp);

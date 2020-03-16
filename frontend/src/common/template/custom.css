@@ -12,6 +12,7 @@ button{
 #SideLogBody{
   padding-left: 10px;
 }
-#logoutIcon{
-  padding-left: 90px
+
+#userName {
+  padding-right: 33%;
 }
