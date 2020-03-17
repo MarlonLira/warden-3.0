@@ -21,10 +21,10 @@ class BillingCycleList extends Component {
         <td>{bc.innerDate.Year}</td>
         <td className='table-actions'>
           <button className='btn btn-warning' onClick={() => this.props.showUpdate(bc)}>
-            <i className='fa fa-pencil'></i>
+            <i className='fa fa-paint-brush'></i>
           </button>
           <button className='btn btn-danger' onClick={() => this.props.showDelete(bc)}>
-            <i className='fa fa-trash-o'></i>
+            <i className='fa fa-trash'></i>
           </button>
         </td>
       </tr>
