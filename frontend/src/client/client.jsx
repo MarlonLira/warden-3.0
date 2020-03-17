@@ -55,6 +55,5 @@ class Client extends Component {
     )
   }
 }
-
 const mapDispatchToProps = dispatch => bindActionCreators({ selectTab, showTabs, create, update, destroy }, dispatch);
 export default connect(null, mapDispatchToProps)(Client);
