@@ -78,6 +78,18 @@ export function showCreate() {
   })
 }
 
+export function selectClient(client){
+  console.log('---> clientActions');
+  console.log(client);
+  console.log('<--- clientActions');
+  return new Promise((resolve, reject) => {
+    resolve({
+      type: 'CLIENT_SELECTED',
+      payload: client
+    });
+  })
+}
+
 export function init() {
   return new Promise((resolve, reject) => {
     resolve([

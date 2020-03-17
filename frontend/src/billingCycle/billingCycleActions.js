@@ -21,7 +21,11 @@ export function getList() {
 }
 
 export function create(values) {
-  return submit(values, 'post');
+  console.log('---> billingCycleActionsCreate');
+  console.log(values);
+  console.log('<--- billingCycleActionsCreate');
+  return 'Não Funcional!';
+  //return submit(values, 'post');
 }
 
 export function update(values) {

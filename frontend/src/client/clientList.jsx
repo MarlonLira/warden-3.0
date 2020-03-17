@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { getList, showUpdate, showDelete, showCreate } from './clientActions';
+import { getList, showUpdate, showDelete, showCreate, selectClient } from './clientActions';
 
 class ClientList extends Component {
 
@@ -14,7 +14,7 @@ class ClientList extends Component {
   renderRows() {
     const list = this.props.list || [];
     return list.map(cl => (
-      <tr key={cl.id}>
+      <tr key={cl.id} id='click' className='click' onClick={() => this.props.selectClient(cl)}>
         <td>{cl.name}</td>
         <td>{cl.registryCode}</td>
         <td>{cl.phone}</td>
@@ -53,5 +53,5 @@ class ClientList extends Component {
 }
 
 const mapStateToProps = state => ({ list: state.client.list });
-const mapDispatchToProps = dispatch => bindActionCreators({ getList, showDelete, showUpdate, showCreate }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ getList, showDelete, showUpdate, showCreate, selectClient }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(ClientList);

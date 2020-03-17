@@ -15,6 +15,7 @@ export default props => (
                     maxLength={props.maxLength}
                     required={props.required}
                     pattern={props.pattern}
+                    value={props.val}
                 />
             </div>
         </Grid>

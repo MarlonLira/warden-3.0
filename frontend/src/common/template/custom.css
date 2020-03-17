@@ -16,3 +16,12 @@ button{
 #userName {
   padding-right: 33%;
 }
+
+*[data-href] {
+  cursor: pointer;
+} 
+
+.click{
+  cursor: pointer;
+  pointer-events: auto;
+}
