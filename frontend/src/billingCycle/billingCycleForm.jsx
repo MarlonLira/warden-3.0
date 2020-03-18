@@ -8,6 +8,8 @@ import labelAndInput from '../common/form/labelAndInput';
 import CreditList from './creditList';
 import Card from '../common/widget/card';
 import ClientList from '../client/clientList';
+import inputAndLabel from '../common/form/InputAndLabel';
+
 
 class BillingCycleForm extends Component {
   render() {
@@ -23,7 +25,7 @@ class BillingCycleForm extends Component {
         </Card>
         <div className='row'>
           <Field name='clientId' component={labelAndInput}
-            label='Cliente' cols='12 4' val={clientId}
+            label='Cliente ID' cols='12 4' val={clientId}
             placeholder='Informe o id do Cliente' type='number'
           />
           <Field name='credit' component={labelAndInput}
@@ -38,7 +40,6 @@ class BillingCycleForm extends Component {
             label='Data' cols='12 4' readOnly={readOnly}
             placeholder='Informe a Data' type='date'
           />
-          <CreditList cols='12 4' readOnly={readOnly} />
         </div>
         <div className='box-footer'>
           <button type='submit' className={`btn btn-${this.props.submitClass}`}>
