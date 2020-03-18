@@ -5,18 +5,35 @@ import { reduxForm, Field } from 'redux-form';
 
 import { init } from './billingCycleActions';
 import labelAndInput from '../common/form/labelAndInput';
-import CreditList from './creditList';
 import Card from '../common/widget/card';
 import ClientList from '../client/clientList';
 import inputAndLabel from '../common/form/InputAndLabel';
 
 
 class BillingCycleForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      clientId: this.props.client.id || 10
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({ ...this.state, clientId: event.target.value });
+  }
+
+  AutoChange(value) {
+    this.setState({ ...this.state, clientId: value });
+  }
+
   render() {
     const { handleSubmit, readOnly } = this.props;
-    const clientId = this.props.client.id || 0;
     console.log('---> BillingCycleForm');
     console.log(this.props);
+    if (this.props.client.id != this.state.clientId) {
+      this.AutoChange(this.props.client.id);
+    }
     console.log('<--- BillingCycleForm');
     return (
       <form role='form' onSubmit={handleSubmit}>
@@ -24,9 +41,9 @@ class BillingCycleForm extends Component {
           <ClientList />
         </Card>
         <div className='row'>
-          <Field name='clientId' component={labelAndInput}
-            label='Cliente ID' cols='12 4' val={clientId}
-            placeholder='Informe o id do Cliente' type='number'
+          <Field name='clientId' component={inputAndLabel}
+            label='Cliente ID' cols='12 4' val={this.state.clientId} handleChange={this.handleChange}
+            placeholder='Informe o id do Cliente' type='number' readOnly='true'
           />
           <Field name='credit' component={labelAndInput}
             label='Credito' cols='12 4' readOnly={readOnly}
