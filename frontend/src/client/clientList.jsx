@@ -14,7 +14,7 @@ class ClientList extends Component {
   renderRows() {
     const list = this.props.list || [];
     return list.map(cl => (
-      <tr key={cl.id} id='click' className='click' onClick={() => this.props.selectClient(cl)}>
+      <tr key={cl.id} className={this.props.isSelectable ? 'click' : ''} onClick={this.props.isSelectable ? () => this.props.selectClient(cl) : () => '#'}>
         <td>{cl.name}</td>
         <td>{cl.registryCode}</td>
         <td>{cl.phone}</td>

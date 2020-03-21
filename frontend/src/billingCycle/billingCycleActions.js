@@ -21,11 +21,10 @@ export function getList() {
 }
 
 export function create(values) {
-  console.log('---> billingCycleActionsCreate');
-  console.log(values);
-  console.log('<--- billingCycleActionsCreate');
-  return 'Não Funcional!';
-  //return submit(values, 'post');
+  var selectedClient = JSON.parse(localStorage.getItem("CLIENT_SELECTED"));
+  values.clientId = selectedClient.id;
+  localStorage.removeItem("CLIENT_SELECTED");
+  return submit(values, 'post');
 }
 
 export function update(values) {

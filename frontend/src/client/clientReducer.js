@@ -7,9 +7,7 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, list: action.payload.data }
     }
     case 'CLIENT_SELECTED': {
-      console.log('---> clientReducer');
-      console.log(action.payload);
-      console.log('<--- clientReducer');
+      localStorage.setItem("CLIENT_SELECTED", JSON.stringify(action.payload));
       return { ...state, selectedClient: action.payload }
     }  
     default: {

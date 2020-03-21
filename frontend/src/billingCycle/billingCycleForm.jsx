@@ -13,36 +13,22 @@ import inputAndLabel from '../common/form/InputAndLabel';
 class BillingCycleForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      clientId: this.props.client.id || 10
-    };
-    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({ ...this.state, clientId: event.target.value });
-  }
-
-  AutoChange(value) {
-    this.setState({ ...this.state, clientId: value });
+  Submit(values) {
+    console.log(values)
   }
 
   render() {
     const { handleSubmit, readOnly } = this.props;
-    console.log('---> BillingCycleForm');
-    console.log(this.props);
-    if (this.props.client.id != this.state.clientId) {
-      this.AutoChange(this.props.client.id);
-    }
-    console.log('<--- BillingCycleForm');
     return (
       <form role='form' onSubmit={handleSubmit}>
         <Card label='Pesquisa de Clientes'>
-          <ClientList />
+          <ClientList isSelectable='true' />
         </Card>
         <div className='row'>
           <Field name='clientId' component={inputAndLabel}
-            label='Cliente ID' cols='12 4' val={this.state.clientId} handleChange={this.handleChange}
+            label='Cliente ID' cols='12 4' val={this.props.client.id}
             placeholder='Informe o id do Cliente' type='number' readOnly='true'
           />
           <Field name='credit' component={labelAndInput}
