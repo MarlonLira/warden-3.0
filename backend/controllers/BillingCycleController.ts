@@ -94,6 +94,7 @@ export default class BillingCycleController extends BillingCycle implements IEnt
         attributes.credit = Attributes.ReturnIfValid(this.credit, result.credit);
         attributes.debit = Attributes.ReturnIfValid(this.debit, result.debit);
         attributes.date = Attributes.ReturnIfValid(this.date, result.date);
+        attributes.clientId = Attributes.ReturnIfValid(this.clientId, result.clientId);
 
         BillingCycle.update(attributes, {
           where: {

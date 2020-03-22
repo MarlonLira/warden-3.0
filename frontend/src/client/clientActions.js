@@ -87,6 +87,15 @@ export function selectClient(client) {
   })
 }
 
+export function clearSelectClient() {
+  return new Promise((resolve, reject) => {
+    resolve({
+      type: 'REMOVE_CLIENT_SELECTED',
+      payload: []
+    });
+  })
+}
+
 export function init() {
   return new Promise((resolve, reject) => {
     resolve([

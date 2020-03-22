@@ -8,22 +8,18 @@ import labelAndInput from '../common/form/labelAndInput';
 import Card from '../common/widget/card';
 import ClientList from '../client/clientList';
 import inputAndLabel from '../common/form/InputAndLabel';
-
+import If from '../common/operator/if';
 
 class BillingCycleForm extends Component {
   constructor(props) {
     super(props);
   }
 
-  Submit(values) {
-    console.log(values)
-  }
-
   render() {
-    const { handleSubmit, readOnly } = this.props;
+    const { handleSubmit, readOnly, isCreateOrUpdate } = this.props;
     return (
       <form role='form' onSubmit={handleSubmit}>
-        <Card label='Pesquisa de Clientes'>
+        <Card label='Pesquisa de Clientes' visible={isCreateOrUpdate}>
           <ClientList isSelectable='true' />
         </Card>
         <div className='row'>

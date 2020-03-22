@@ -3,6 +3,7 @@ import { toastr } from 'react-redux-toastr';
 import { reset as resetForm, initialize } from 'redux-form';
 import { showTabs, selectTab } from '../common/tab/tabActions';
 import { ReturnIfValid } from '../common/functions/properties';
+import { selectClient, clearSelectClient } from '../client/clientActions';
 import Consts from '../consts';
 
 const BASE_URL = Consts.API_URL;
@@ -22,12 +23,19 @@ export function getList() {
 
 export function create(values) {
   var selectedClient = JSON.parse(localStorage.getItem("CLIENT_SELECTED"));
-  values.clientId = selectedClient.id;
-  localStorage.removeItem("CLIENT_SELECTED");
-  return submit(values, 'post');
+  if (selectedClient != undefined && selectedClient != null) {
+    values.clientId = selectedClient.id;
+    return submit(values, 'post');
+  } else {
+    toastr.error('Error: ', 'Selecione um cliente!');
+  }
 }
 
 export function update(values) {
+  var selectedClient = JSON.parse(localStorage.getItem("CLIENT_SELECTED"));
+  if (selectedClient != undefined && selectedClient != null) {
+    values.clientId = selectedClient.id;
+  } 
   return submit(values, 'put');
 }
 
@@ -36,6 +44,7 @@ export function destroy(values) {
 }
 
 function submit(values, method) {
+  clearSelectClient();
   return new Promise((resolve, reject) => {
     const id = (method == 'delete' || method == 'get') ? ReturnIfValid(values.id, '') : '';
     axios[method](`${BASE_URL}/billingCycle/${id}`, values)
@@ -55,6 +64,7 @@ function submit(values, method) {
 export function showUpdate(billingCycle) {
   return new Promise((resolve, reject) => {
     resolve([
+      selectClient(billingCycle.client),
       showTabs('tabUpdate'),
       selectTab('tabUpdate'),
       initialize('billingCycleForm', billingCycle)
@@ -64,6 +74,7 @@ export function showUpdate(billingCycle) {
 export function showDelete(billingCycle) {
   return new Promise((resolve, reject) => {
     resolve([
+      selectClient(billingCycle.client),
       showTabs('tabDelete'),
       selectTab('tabDelete'),
       initialize('billingCycleForm', billingCycle)
@@ -77,7 +88,8 @@ export function init() {
       showTabs('tabList', 'tabCreate'),
       selectTab('tabList'),
       getList(),
-      initialize('billingCycleForm', INITIAL_VALUES)
+      initialize('billingCycleForm', INITIAL_VALUES),
+      clearSelectClient()
     ]);
   })
 }

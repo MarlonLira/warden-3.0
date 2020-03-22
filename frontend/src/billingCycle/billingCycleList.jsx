@@ -8,6 +8,38 @@ class BillingCycleList extends Component {
 
   componentWillMount() {
     this.props.getList();
+    $("#showUpdate").on("click", function () {
+      alert("Clique");
+    });
+  }
+  componentDidMount() {
+    
+  }
+
+  teste() {
+    $('#myTable').DataTable({
+      ajax: {
+        url: 'http://localhost:4001/billingCycles',
+        dataSrc: ''
+      },
+      columns: [
+        { data: 'client.name' },
+        { data: 'credit' },
+        { data: 'debit' },
+        { data: 'innerDate.Month' },
+        { data: 'innerDate.Year' },
+        {
+          data: null, render: function () {
+            return (`<button id='showUpdate' class='btn btn-warning' onClick>` +
+              "<i class='fa fa-paint-brush'></i>" +
+              "</button>" +
+              `<button class='btn btn-danger' onClick={${() => this.props.showDelete(bc)}}>` +
+              "<i class='fa fa-trash'></i>" +
+              "</button>");
+          }
+        }
+      ]
+    });
   }
 
   renderRows() {
@@ -33,7 +65,7 @@ class BillingCycleList extends Component {
   render() {
     return (
       <div>
-        <table className='table'>
+        <table id='myTable' className='table table-bordered table-striped'>
           <thead>
             <tr>
               <th>Cliente</th>
